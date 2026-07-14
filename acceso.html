@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Altiora — Acceso acreditados</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A1A24;--surface:#0F2733;--surface2:#08151D;--gold:#C8A24A;--gold2:#D4AF37;--ivory:#F4F2EC;--muted:#9FB0BA;--line:rgba(200,162,74,.18);--line2:rgba(159,176,186,.14);}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ivory);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+.s{font-family:'Cormorant Garamond',serif;}
+a{color:var(--gold);text-decoration:none;}
+.demo{background:var(--surface2);border-bottom:1px solid var(--line2);text-align:center;padding:6px 12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.gbtn{background:var(--gold);color:#0A1A24;border:none;font-weight:600;cursor:pointer;border-radius:30px;}
+.gbtn:hover{background:var(--gold2);}
+.nlink{background:none;border:none;color:var(--ivory);font-size:14px;padding:9px 13px;cursor:pointer;border-radius:6px;font-family:inherit;}
+.nlink:hover{color:var(--gold);}
+input{font-family:inherit;}
+.drop{display:none;position:absolute;left:0;right:0;top:100%;z-index:70;background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 24px 48px rgba(0,0,0,.4);}
+.drop.open{display:block;}
+.ditem{display:flex;gap:14px;padding:14px;border-radius:10px;cursor:pointer;}
+.ditem:hover{background:var(--surface2);}
+@media(max-width:900px){.acc-grid{grid-template-columns:1fr !important;}.nav-links{display:none !important;}}
+</style>
+</head>
+<body>
+<div class="demo" data-i18n="demo">Prototipo · datos de demostración</div>
+
+<div style="background:var(--surface2);border-bottom:1px solid var(--line2);font-size:13px;">
+  <div style="max-width:1240px;margin:0 auto;padding:9px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:22px;color:var(--muted);">
+      <span style="display:flex;align-items:center;gap:7px;"><span style="color:var(--gold);">✆</span><span data-i18n="u_tel">55 1084 3500</span></span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="color:var(--gold);">✉</span><span data-i18n="u_mail">contacto@altiora.mx</span></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="color:var(--gold);cursor:pointer;" data-i18n="u_invertir">¿Listo para invertir?</span>
+      <span style="width:1px;height:14px;background:var(--line);"></span>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button onclick="setLang('es')" id="lang-es" style="background:none;border:none;cursor:pointer;font-size:12px;padding:2px 4px;color:var(--gold);">ES</button>
+        <span style="color:var(--line);">/</span>
+        <button onclick="setLang('en')" id="lang-en" style="background:none;border:none;cursor:pointer;font-size:12px;padding:2px 4px;color:var(--muted);">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position:sticky;top:0;z-index:60;background:rgba(10,26,36,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);">
+  <div style="max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="index.html" style="display:flex;align-items:center;gap:13px;">
+      <svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg>
+      <div style="line-height:1;"><div class="s" style="font-size:23px;font-weight:600;letter-spacing:.16em;">ALTIORA</div><div style="font-size:9px;letter-spacing:.34em;color:var(--gold);margin-top:3px;">INMOBILIARIA</div></div>
+    </a>
+    <nav class="nav-links" style="display:flex;align-items:center;gap:6px;">
+      <a href="index.html" class="nlink" data-i18n="n_inicio">Inicio</a>
+      <button class="nlink" onclick="toggleDrop('nosotros')" style="display:flex;align-items:center;gap:6px;"><span data-i18n="n_nosotros">Nosotros</span> <span style="font-size:9px;color:var(--gold);">▾</span></button>
+      <button class="nlink" onclick="toggleDrop('servicios')" style="display:flex;align-items:center;gap:6px;"><span data-i18n="n_servicios">Servicios</span> <span style="font-size:9px;color:var(--gold);">▾</span></button>
+      <a href="catalogo.html" class="nlink" data-i18n="n_inversion">Inversión en bienes</a>
+      <a href="acceso.html" class="nlink" style="color:var(--gold);" data-i18n="n_portal">Portal acreditados</a>
+      <a href="acceso.html"><button class="gbtn" style="margin-left:8px;font-size:14px;padding:11px 22px;" data-i18n="n_ingresar">Ingresar</button></a>
+    </nav>
+  </div>
+  <div id="drop-nosotros" class="drop"><div style="max-width:1240px;margin:0 auto;padding:26px 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◷</span><div><div data-i18n="nd_a">Conócenos</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_as">Nuestra historia</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◆</span><div><div data-i18n="nd_b">Nuestros pilares</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_bs">Valores fundamentales</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">✦</span><div><div data-i18n="nd_c">Filosofía</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_cs">Misión y visión</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◉</span><div><div data-i18n="nd_d">Cobertura nacional</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_ds">Presencia en México</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">❈</span><div><div data-i18n="nd_e">Responsabilidad</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_es">Compromiso social</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">⚖</span><div><div data-i18n="nd_f">Código de ética</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_fs">Principios y conducta</div></div></div>
+  </div></div>
+  <div id="drop-servicios" class="drop"><div style="max-width:1240px;margin:0 auto;padding:26px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◫</span><div><div data-i18n="sd_a">Servicios integrales</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_as">Inversión con blindaje legal</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">✧</span><div><div data-i18n="sd_b">Certificaciones</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_bs">Estándares y calidad</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">★</span><div><div data-i18n="sd_c">Calificaciones</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_cs">Respaldo y confianza</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">⌘</span><div><div data-i18n="sd_d">Soluciones tecnológicas</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_ds">Portal e innovación</div></div></div>
+  </div></div>
+</div>
+
+<section class="acc-grid" style="max-width:1240px;margin:0 auto;padding:64px 32px 90px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;">
+  <div style="border-left:3px solid var(--gold);padding-left:26px;">
+    <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="ac_eyebrow">Portal de acreditados</div>
+    <h1 class="s" style="font-weight:500;font-size:46px;margin:14px 0 0;" data-i18n="ac_welcome">Bienvenido, acreditado</h1>
+    <p style="font-size:16px;line-height:1.7;color:var(--muted);margin:18px 0 24px;max-width:480px;" data-i18n="ac_intro">En Altiora estamos comprometidos con los más altos estándares de servicio. Al ingresar tendrás control total sobre tu inversión.</p>
+    <div style="display:grid;gap:12px;max-width:440px;">
+      <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b1">Consultar saldos y pagos</span></div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b2">Descargar estados de cuenta</span></div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b3">Conocer importes y fechas límite</span></div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b4">Levantar aclaraciones y trámites</span></div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin-top:26px;" data-i18n="ac_channels">Ponemos a tu disposición nuestros canales de comunicación.</p>
+    <div style="margin-top:14px;display:flex;gap:36px;flex-wrap:wrap;">
+      <div style="border-left:2px solid var(--gold);padding-left:14px;"><div style="font-size:12px;color:var(--muted);" data-i18n="ft_att">Atención a clientes</div><div style="font-size:14px;color:var(--gold);">clientes@altiora.mx</div><div style="font-size:13px;color:var(--muted);">55 1084 3510</div></div>
+      <div style="border-left:2px solid var(--gold);padding-left:14px;"><div style="font-size:12px;color:var(--muted);" data-i18n="ft_den">Denuncia y ética</div><div style="font-size:14px;color:var(--gold);">etica@altiora.mx</div><div style="font-size:13px;color:var(--muted);">55 1084 3512</div></div>
+    </div>
+  </div>
+  <div style="position:relative;">
+    <div style="position:absolute;inset:22px -14px -22px 22px;background:var(--gold);border-radius:16px;opacity:.85;"></div>
+    <div style="position:relative;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:38px 36px 34px;box-shadow:0 30px 60px rgba(0,0,0,.45);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg>
+        <h2 class="s" style="font-weight:600;font-size:28px;margin:0;" data-i18n="ac_access">Acceso</h2>
+      </div>
+      <label style="display:block;margin-top:26px;">
+        <span style="display:block;font-size:12px;color:var(--muted);margin-bottom:7px;" data-i18n="ac_user">No. de crédito o usuario</span>
+        <input type="text" style="width:100%;background:var(--surface2);border:1px solid var(--line2);border-radius:9px;padding:13px 14px;color:var(--ivory);font-size:15px;" />
+      </label>
+      <label style="display:block;margin-top:16px;">
+        <span style="display:block;font-size:12px;color:var(--muted);margin-bottom:7px;" data-i18n="ac_pass">Contraseña</span>
+        <input type="password" style="width:100%;background:var(--surface2);border:1px solid var(--line2);border-radius:9px;padding:13px 14px;color:var(--ivory);font-size:15px;" />
+      </label>
+      <a href="portal.html"><button class="gbtn" style="width:100%;margin-top:24px;border-radius:9px;font-size:15px;padding:14px;" data-i18n="ac_enter">Ingresar</button></a>
+      <div style="display:flex;justify-content:center;gap:18px;margin-top:18px;font-size:13px;">
+        <span style="color:var(--gold);cursor:pointer;" data-i18n="ac_register">Registro</span>
+        <span style="color:var(--line);">|</span>
+        <span style="color:var(--muted);cursor:pointer;" data-i18n="ac_recover">Recuperar contraseña</span>
+      </div>
+      <div style="margin-top:22px;border-top:1px solid var(--line2);padding-top:16px;text-align:center;">
+        <a href="portal.html" style="color:var(--muted);font-size:13px;"><span data-i18n="ac_agent">¿Eres agente Altiora? Entra al panel de carga.</span> →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--surface2);border-top:1px solid var(--line);">
+  <div style="max-width:1240px;margin:0 auto;padding:40px 32px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <div style="display:inline-flex;align-items:center;gap:12px;"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg><span class="s" style="font-size:20px;letter-spacing:.16em;">ALTIORA</span></div>
+    <span style="font-size:12px;color:var(--muted);" data-i18n="ft_rights">© 2026 Grupo Altiora. Prototipo de demostración. Cifras y logos son placeholders.</span>
+  </div>
+</footer>
+
+<script>
+var I18N={
+ es:{demo:'Prototipo · datos de demostración',u_tel:'55 1084 3500',u_mail:'contacto@altiora.mx',u_invertir:'¿Listo para invertir?',n_inicio:'Inicio',n_nosotros:'Nosotros',n_servicios:'Servicios',n_inversion:'Inversión en bienes',n_portal:'Portal acreditados',n_ingresar:'Ingresar',nd_a:'Conócenos',nd_as:'Nuestra historia',nd_b:'Nuestros pilares',nd_bs:'Valores fundamentales',nd_c:'Filosofía',nd_cs:'Misión y visión',nd_d:'Cobertura nacional',nd_ds:'Presencia en México',nd_e:'Responsabilidad',nd_es:'Compromiso social',nd_f:'Código de ética',nd_fs:'Principios y conducta',sd_a:'Servicios integrales',sd_as:'Inversión con blindaje legal',sd_b:'Certificaciones',sd_bs:'Estándares y calidad',sd_c:'Calificaciones',sd_cs:'Respaldo y confianza',sd_d:'Soluciones tecnológicas',sd_ds:'Portal e innovación',ac_eyebrow:'Portal de acreditados',ac_welcome:'Bienvenido, acreditado',ac_intro:'En Altiora estamos comprometidos con los más altos estándares de servicio. Al ingresar tendrás control total sobre tu inversión.',ac_access:'Acceso',ac_user:'No. de crédito o usuario',ac_pass:'Contraseña',ac_enter:'Ingresar',ac_register:'Registro',ac_recover:'Recuperar contraseña',ac_channels:'Ponemos a tu disposición nuestros canales de comunicación.',ac_agent:'¿Eres agente Altiora? Entra al panel de carga.',pa_b1:'Consultar saldos y pagos',pa_b2:'Descargar estados de cuenta',pa_b3:'Conocer importes y fechas límite',pa_b4:'Levantar aclaraciones y trámites',ft_att:'Atención a clientes',ft_den:'Denuncia y ética',ft_rights:'© 2026 Grupo Altiora. Prototipo de demostración. Cifras y logos son placeholders.'},
+ en:{demo:'Prototype · demonstration data',u_tel:'+52 55 1084 3500',u_mail:'contact@altiora.mx',u_invertir:'Ready to invest?',n_inicio:'Home',n_nosotros:'About',n_servicios:'Services',n_inversion:'Real estate',n_portal:'Client portal',n_ingresar:'Sign in',nd_a:'About us',nd_as:'Our story',nd_b:'Our pillars',nd_bs:'Core values',nd_c:'Philosophy',nd_cs:'Mission & vision',nd_d:'National reach',nd_ds:'Presence in Mexico',nd_e:'Responsibility',nd_es:'Social commitment',nd_f:'Code of ethics',nd_fs:'Principles & conduct',sd_a:'Integral services',sd_as:'Investing with legal shielding',sd_b:'Certifications',sd_bs:'Standards & quality',sd_c:'Ratings',sd_cs:'Backing & trust',sd_d:'Tech solutions',sd_ds:'Portal & innovation',ac_eyebrow:'Client portal',ac_welcome:'Welcome, client',ac_intro:'At Altiora we are committed to the highest service standards. Signing in gives you full control over your investment.',ac_access:'Access',ac_user:'Loan no. or username',ac_pass:'Password',ac_enter:'Sign in',ac_register:'Register',ac_recover:'Recover password',ac_channels:'Our communication channels are at your disposal.',ac_agent:'Are you an Altiora agent? Enter the loading panel.',pa_b1:'Check balances and payments',pa_b2:'Download account statements',pa_b3:'See amounts and due dates',pa_b4:'Raise clarifications and requests',ft_att:'Client service',ft_den:'Reports & ethics',ft_rights:'© 2026 Grupo Altiora. Demonstration prototype. Figures and logos are placeholders.'}
+};
+var lang='es';
+function setLang(l){lang=l;var d=I18N[l];document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(d[k]!=null)e.textContent=d[k];});document.getElementById('lang-es').style.color=l==='es'?'var(--gold)':'var(--muted)';document.getElementById('lang-en').style.color=l==='en'?'var(--gold)':'var(--muted)';document.documentElement.lang=l;}
+function toggleDrop(id){var el=document.getElementById('drop-'+id);var o=document.getElementById('drop-'+(id==='nosotros'?'servicios':'nosotros'));o.classList.remove('open');el.classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-links')){document.querySelectorAll('.drop').forEach(function(d){d.classList.remove('open');});}});
+</script>
+</body>
+</html>

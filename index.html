@@ -4,77 +4,281 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Grupo Altiora — Propuesta visual</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
+<title>Altiora — Inversión inmobiliaria patrimonial</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0A1A24;color:#F4F2EC;font-family:'Inter',sans-serif}
-.s{font-family:'Cormorant Garamond',serif}
-.demo{background:#14110F;color:#C8A24A;font-size:11px;letter-spacing:2px;text-align:center;padding:8px}
-.wrap{max-width:860px;margin:0 auto;padding:40px 22px 60px}
-.hero{text-align:center;padding:30px 0 36px;position:relative}
-.eye{font-size:11px;letter-spacing:3px;color:#C8A24A}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.card{background:#0F2733;border:0.5px solid rgba(200,162,74,0.22);border-radius:12px;padding:22px;text-decoration:none;color:inherit;display:block;transition:border-color .2s}
-.card:hover{border-color:#C8A24A}
-.card .t{font-size:18px;margin:10px 0 6px}
-.card p{font-size:13px;color:#9FB0BA;line-height:1.55;margin:0}
-.go{display:inline-block;margin-top:14px;font-size:12px;color:#C8A24A;font-weight:500}
-.foot{text-align:center;font-size:11px;color:#7E8C96;margin-top:40px}
-@media(max-width:620px){.grid{grid-template-columns:1fr}}
+:root{--bg:#0A1A24;--surface:#0F2733;--surface2:#08151D;--gold:#C8A24A;--gold2:#D4AF37;--ivory:#F4F2EC;--muted:#9FB0BA;--line:rgba(200,162,74,.18);--line2:rgba(159,176,186,.14);}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ivory);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+.s{font-family:'Cormorant Garamond',serif;}
+a{color:var(--gold);text-decoration:none;}
+select option{background:#0F2733;color:#F4F2EC;}
+.demo{background:var(--surface2);border-bottom:1px solid var(--line2);text-align:center;padding:6px 12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.gbtn{background:var(--gold);color:#0A1A24;border:none;font-weight:600;cursor:pointer;border-radius:30px;}
+.gbtn:hover{background:var(--gold2);}
+.obtn{background:transparent;color:var(--ivory);border:1px solid var(--line);cursor:pointer;border-radius:30px;}
+.obtn:hover{border-color:var(--gold);color:var(--gold);}
+.nlink{background:none;border:none;color:var(--ivory);font-size:14px;padding:9px 13px;cursor:pointer;border-radius:6px;font-family:inherit;}
+.nlink:hover{color:var(--gold);}
+.card{background:var(--surface);border:1px solid var(--line2);border-radius:16px;}
+select{width:100%;background:var(--surface2);color:var(--ivory);border:1px solid var(--line2);border-radius:8px;padding:11px 12px;font-size:14px;font-family:inherit;}
+.flabel{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.drop{display:none;position:absolute;left:0;right:0;top:100%;z-index:70;background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 24px 48px rgba(0,0,0,.4);}
+.drop.open{display:block;}
+.ditem{display:flex;gap:14px;padding:14px;border-radius:10px;cursor:pointer;}
+.ditem:hover{background:var(--surface2);}
+@media(max-width:900px){.hero-grid,.two,.teaser-grid{grid-template-columns:1fr !important;}.searchbar{grid-template-columns:1fr 1fr !important;}.trust{grid-template-columns:1fr 1fr !important;}.cats,.vp{grid-template-columns:1fr !important;}.vp-arrow{display:none !important;}.nav-links{display:none !important;}}
 </style>
 </head>
 <body>
-<div class="demo">PROPUESTA · MOCKUP — DATOS DE DEMOSTRACIÓN (NO REALES)</div>
-<div class="wrap">
-  <div class="hero">
-    <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="#C8A24A"/></svg>
-    <div class="eye" style="margin:16px 0 14px">PROPUESTA DE SITIO WEB</div>
-    <div class="s" style="font-size:40px;letter-spacing:6px">ALTIORA</div>
-    <div style="color:#D4AF37;font-size:13px;letter-spacing:1px;margin-top:6px">Jurídico · Fiscal · Inmobiliario · Academia</div>
-    <p style="color:#9FB0BA;font-size:14px;max-width:480px;margin:18px auto 0;line-height:1.6">Estas son las pantallas propuestas para el sitio del grupo. Es una maqueta visual (HTML), todavía no la página final con código real.</p>
-  </div>
+<div class="demo" data-i18n="demo">Prototipo · datos de demostración</div>
 
-  <div class="grid">
-    <a class="card" href="marca.html">
-      <i class="ti ti-diamond" style="font-size:24px;color:#C8A24A"></i>
-      <div class="s t">Marca / Manifiesto</div>
-      <p>El ADN de Altiora: manifiesto, los cuatro arquetipos, la Visión Periférica y la materialidad.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <a class="card" href="home.html">
-      <i class="ti ti-home" style="font-size:24px;color:#C8A24A"></i>
-      <div class="s t">Página principal</div>
-      <p>La home del grupo, con los 4 pilares y el ecosistema. Bilingüe ES/EN y modo claro/oscuro en vivo.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <a class="card" href="identidad.html">
-      <i class="ti ti-palette" style="font-size:24px;color:#C8A24A"></i>
-      <div class="s t">Identidad</div>
-      <p>Logo, monograma, paleta exacta (navy + oro + mármol) y tipografía.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <a class="card" href="legal.html">
-      <i class="ti ti-gavel" style="font-size:24px;color:#C8A24A"></i>
-      <div class="s t">Altiora Legal</div>
-      <p>Landing del despacho jurídico: áreas de práctica, proceso, FAQ y consulta sin costo.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <a class="card" href="orbita.html">
-      <i class="ti ti-layout-dashboard" style="font-size:24px;color:#C8A24A"></i>
-      <div class="s t">Portal Órbita</div>
-      <p>Acceso y dashboard del cliente: estado de los 4 pilares y las apps Cronos, Bóveda y Brújula.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <div class="card" style="border-style:dashed;opacity:0.75">
-      <i class="ti ti-dots" style="font-size:24px;color:#9FB0BA"></i>
-      <div class="s t" style="color:#9FB0BA">Más por venir</div>
-      <p>Landings de Fiscal, Inmobiliaria y Academia + página de Ecosistema.</p>
+<!-- Utility bar -->
+<div style="background:var(--surface2);border-bottom:1px solid var(--line2);font-size:13px;">
+  <div style="max-width:1240px;margin:0 auto;padding:9px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:22px;color:var(--muted);">
+      <span style="display:flex;align-items:center;gap:7px;"><span style="color:var(--gold);">✆</span><span data-i18n="u_tel">55 1084 3500</span></span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="color:var(--gold);">✉</span><span data-i18n="u_mail">contacto@altiora.mx</span></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="color:var(--gold);cursor:pointer;" data-i18n="u_invertir">¿Listo para invertir?</span>
+      <span style="width:1px;height:14px;background:var(--line);"></span>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button onclick="setLang('es')" id="lang-es" style="background:none;border:none;cursor:pointer;font-size:12px;letter-spacing:.08em;padding:2px 4px;color:var(--gold);">ES</button>
+        <span style="color:var(--line);">/</span>
+        <button onclick="setLang('en')" id="lang-en" style="background:none;border:none;cursor:pointer;font-size:12px;letter-spacing:.08em;padding:2px 4px;color:var(--muted);">EN</button>
+      </div>
     </div>
   </div>
-
-  <div class="foot">© 2026 Grupo Altiora · CDMX · Propuesta visual preparada para revisión interna</div>
 </div>
+
+<!-- Main nav -->
+<div style="position:sticky;top:0;z-index:60;background:rgba(10,26,36,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);">
+  <div style="max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="index.html" style="display:flex;align-items:center;gap:13px;">
+      <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg>
+      <div style="line-height:1;">
+        <div class="s" style="font-size:23px;font-weight:600;letter-spacing:.16em;color:var(--ivory);">ALTIORA</div>
+        <div style="font-size:9px;letter-spacing:.34em;color:var(--gold);margin-top:3px;">INMOBILIARIA</div>
+      </div>
+    </a>
+    <nav class="nav-links" style="display:flex;align-items:center;gap:6px;">
+      <a href="index.html" class="nlink" data-i18n="n_inicio">Inicio</a>
+      <button class="nlink" onclick="toggleDrop('nosotros')" style="display:flex;align-items:center;gap:6px;"><span data-i18n="n_nosotros">Nosotros</span> <span style="font-size:9px;color:var(--gold);">▾</span></button>
+      <button class="nlink" onclick="toggleDrop('servicios')" style="display:flex;align-items:center;gap:6px;"><span data-i18n="n_servicios">Servicios</span> <span style="font-size:9px;color:var(--gold);">▾</span></button>
+      <a href="catalogo.html" class="nlink" data-i18n="n_inversion">Inversión en bienes</a>
+      <a href="acceso.html" class="nlink" data-i18n="n_portal">Portal acreditados</a>
+      <a href="acceso.html"><button class="gbtn" style="margin-left:8px;font-size:14px;padding:11px 22px;" data-i18n="n_ingresar">Ingresar</button></a>
+    </nav>
+  </div>
+
+  <div id="drop-nosotros" class="drop">
+    <div style="max-width:1240px;margin:0 auto;padding:26px 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">◷</span><div><div data-i18n="nd_a">Conócenos</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_as">Nuestra historia</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">◆</span><div><div data-i18n="nd_b">Nuestros pilares</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_bs">Valores fundamentales</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">✦</span><div><div data-i18n="nd_c">Filosofía</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_cs">Misión y visión</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">◉</span><div><div data-i18n="nd_d">Cobertura nacional</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_ds">Presencia en México</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">❈</span><div><div data-i18n="nd_e">Responsabilidad</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_es">Compromiso social</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">⚖</span><div><div data-i18n="nd_f">Código de ética</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_fs">Principios y conducta</div></div></div>
+    </div>
+  </div>
+  <div id="drop-servicios" class="drop">
+    <div style="max-width:1240px;margin:0 auto;padding:26px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">◫</span><div><div data-i18n="sd_a">Servicios integrales</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_as">Inversión con blindaje legal</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">✧</span><div><div data-i18n="sd_b">Certificaciones</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_bs">Estándares y calidad</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">★</span><div><div data-i18n="sd_c">Calificaciones</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_cs">Respaldo y confianza</div></div></div>
+      <div class="ditem"><span style="color:var(--gold);font-size:20px;">⌘</span><div><div data-i18n="sd_d">Soluciones tecnológicas</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_ds">Portal e innovación</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<section style="position:relative;background:radial-gradient(1100px 500px at 78% -10%,rgba(200,162,74,.10),transparent 60%),linear-gradient(180deg,var(--bg),var(--surface2));">
+  <div class="hero-grid" style="max-width:1240px;margin:0 auto;padding:70px 32px 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;">
+    <div>
+      <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="h_eyebrow">Oportunidades de inversión inmobiliaria</div>
+      <h1 class="s" style="font-weight:500;font-size:58px;line-height:1.04;margin:20px 0 0;color:var(--ivory);" data-i18n="h_title">Hacemos flotar tu patrimonio por encima de la complejidad.</h1>
+      <p style="font-size:17px;line-height:1.7;color:var(--muted);max-width:520px;margin:22px 0 0;" data-i18n="h_sub">Bienes adjudicados y cesiones de derechos, con servicios legales y fiscales incluidos. Inversión inmobiliaria con la máxima precisión, seguridad y certidumbre.</p>
+      <div style="display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;">
+        <a href="catalogo.html"><button class="gbtn" style="font-size:15px;padding:14px 28px;" data-i18n="h_cta1">Ver oportunidades</button></a>
+        <a href="acceso.html"><button class="obtn" style="font-size:15px;padding:14px 28px;" data-i18n="h_cta2">Acceso acreditados</button></a>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div style="position:relative;aspect-ratio:4/3;border-radius:16px;border:1px solid var(--line);overflow:hidden;background-color:hsl(205 26% 16%);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 2px,transparent 2px 13px);display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Courier New',monospace;font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;" data-i18n="img_render">render del inmueble</span>
+      </div>
+      <div style="position:absolute;bottom:-18px;left:-18px;background:var(--gold);color:#0A1A24;padding:14px 20px;border-radius:12px;box-shadow:0 16px 34px rgba(0,0,0,.4);">
+        <div class="s" style="font-size:30px;font-weight:600;line-height:1;">+180</div>
+        <div style="font-size:11px;letter-spacing:.08em;margin-top:4px;" data-i18n="img_stat">propiedades activas</div>
+      </div>
+    </div>
+  </div>
+  <!-- Search bar -->
+  <div style="max-width:1240px;margin:0 auto;padding:0 32px;transform:translateY(28px);">
+    <div class="searchbar" style="background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.35);padding:16px;display:grid;grid-template-columns:repeat(5,1fr) auto;gap:12px;align-items:end;">
+      <label><span class="flabel" data-i18n="f_estado">Estado</span><select><option data-i18n="f_sel">Seleccionar…</option><option>CDMX</option><option>Estado de México</option><option>Querétaro</option><option>Jalisco</option></select></label>
+      <label><span class="flabel" data-i18n="f_municipio">Municipio</span><select><option data-i18n="f_sel">Seleccionar…</option></select></label>
+      <label><span class="flabel" data-i18n="f_tipoinv">Tipo de inversión</span><select><option data-i18n="f_sel">Seleccionar…</option><option data-i18n="adj">Bienes adjudicados</option><option data-i18n="ces">Cesiones de derechos</option></select></label>
+      <label><span class="flabel" data-i18n="f_tipoinm">Tipo de inmueble</span><select><option data-i18n="f_sel">Seleccionar…</option><option>Casa sola</option><option>Departamento</option><option>Terreno</option><option>Local comercial</option></select></label>
+      <label><span class="flabel" data-i18n="f_precio">Precio</span><select><option data-i18n="f_sel">Seleccionar…</option><option>&lt; $3M</option><option>$3M – $5M</option><option>&gt; $5M</option></select></label>
+      <a href="catalogo.html"><button class="gbtn" style="border-radius:8px;font-size:14px;padding:12px 24px;height:42px;width:100%;" data-i18n="f_buscar">Buscar</button></a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust bar -->
+<section style="border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin-top:52px;">
+  <div class="trust" style="max-width:1240px;margin:0 auto;padding:34px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">
+    <div><div class="s" style="font-size:40px;color:var(--gold);line-height:1;">25</div><div style="font-size:13px;color:var(--muted);margin-top:8px;" data-i18n="tb_1">años de trayectoria</div></div>
+    <div><div class="s" style="font-size:40px;color:var(--gold);line-height:1;">+1,200</div><div style="font-size:13px;color:var(--muted);margin-top:8px;" data-i18n="tb_2">inmuebles colocados</div></div>
+    <div><div class="s" style="font-size:40px;color:var(--gold);line-height:1;">18</div><div style="font-size:13px;color:var(--muted);margin-top:8px;" data-i18n="tb_3">estados de cobertura</div></div>
+    <div><div class="s" style="font-size:40px;color:var(--gold);line-height:1;">100%</div><div style="font-size:13px;color:var(--muted);margin-top:8px;" data-i18n="tb_4">con servicios legales</div></div>
+  </div>
+</section>
+
+<!-- Inversión en bienes -->
+<section style="max-width:1240px;margin:0 auto;padding:78px 32px;">
+  <div style="text-align:center;max-width:640px;margin:0 auto;">
+    <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="inv_eyebrow">Dos caminos para invertir</div>
+    <h2 class="s" style="font-weight:500;font-size:44px;margin:16px 0 0;color:var(--ivory);" data-i18n="inv_title">Inversión en bienes</h2>
+    <p style="font-size:16px;line-height:1.7;color:var(--muted);margin:16px 0 0;" data-i18n="inv_sub">Adquiere por debajo del valor comercial y deja que nuestro equipo blinde cada operación de principio a fin.</p>
+  </div>
+  <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px;">
+    <div class="card" style="overflow:hidden;">
+      <div style="padding:36px 32px;background:linear-gradient(135deg,#0F2733,#08151D);border-bottom:2px solid var(--gold);">
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);">01</div>
+        <h3 class="s" style="font-weight:600;font-size:30px;margin:10px 0 0;" data-i18n="c1_t">Cesiones de derechos</h3>
+      </div>
+      <div style="padding:28px 32px 34px;">
+        <p style="font-size:15px;line-height:1.7;color:var(--muted);margin:0;" data-i18n="c1_d">Compra los derechos de cobro de un crédito hipotecario en proceso judicial. Al adquirirlo, tomas los derechos litigiosos sobre el inmueble.</p>
+        <div style="margin-top:22px;border-left:3px solid var(--gold);background:rgba(200,162,74,.07);padding:16px 18px;border-radius:0 10px 10px 0;">
+          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;" data-i18n="c1_bl">Beneficio clave</div>
+          <p style="font-size:14px;line-height:1.6;color:var(--ivory);margin:8px 0 0;" data-i18n="c1_b">Si el proceso concluye a favor, obtienes los derechos sobre el remate del inmueble para su adjudicación.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="overflow:hidden;">
+      <div style="padding:36px 32px;background:linear-gradient(135deg,#2a1c0e,#1a1207);border-bottom:2px solid var(--gold);">
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);">02</div>
+        <h3 class="s" style="font-weight:600;font-size:30px;margin:10px 0 0;" data-i18n="c2_t">Bienes adjudicados</h3>
+      </div>
+      <div style="padding:28px 32px 34px;">
+        <p style="font-size:15px;line-height:1.7;color:var(--muted);margin:0;" data-i18n="c2_d">Inmuebles obtenidos por mandato judicial o dación en pago. Están listos para su comercialización directa e inmediata.</p>
+        <div style="margin-top:22px;border-left:3px solid var(--gold);background:rgba(200,162,74,.07);padding:16px 18px;border-radius:0 10px 10px 0;">
+          <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;" data-i18n="c2_bl">Beneficio clave</div>
+          <p style="font-size:14px;line-height:1.6;color:var(--ivory);margin:8px 0 0;" data-i18n="c2_b">Precios muy por debajo del valor comercial para quien busca invertir, rentar o revender con plusvalía.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:34px;">
+    <a href="catalogo.html"><button class="obtn" style="color:var(--gold);border-color:var(--gold);font-size:15px;padding:13px 30px;" data-i18n="inv_cta">Explorar el catálogo</button></a>
+  </div>
+</section>
+
+<!-- Catálogo preview -->
+<section style="background:var(--surface2);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);">
+  <div style="max-width:1240px;margin:0 auto;padding:72px 32px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div style="max-width:620px;">
+        <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="cat_eyebrow">Propiedades disponibles</div>
+        <h2 class="s" style="font-weight:500;font-size:40px;margin:14px 0 0;color:var(--ivory);" data-i18n="cat_title">Un portafolio sólido, con blindaje legal incluido</h2>
+        <p style="font-size:15px;color:var(--muted);margin:12px 0 0;" data-i18n="cat_sub">Conoce las oportunidades disponibles hoy en el catálogo Altiora.</p>
+      </div>
+      <a href="catalogo.html" style="font-size:14px;white-space:nowrap;"><span data-i18n="cat_cta">Ver catálogo completo</span> →</a>
+    </div>
+    <div class="cats" id="home-props" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:34px;"></div>
+  </div>
+</section>
+
+<!-- Visión Periférica -->
+<section style="max-width:1240px;margin:0 auto;padding:82px 32px;">
+  <div style="text-align:center;max-width:660px;margin:0 auto;">
+    <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="vp_eyebrow">Visión periférica</div>
+    <h2 class="s" style="font-weight:500;font-size:44px;margin:16px 0 0;" data-i18n="vp_title">Un ecosistema que gira solo</h2>
+    <p style="font-size:16px;line-height:1.7;color:var(--muted);margin:16px 0 0;" data-i18n="vp_sub">No vendemos propiedades sueltas: conectamos adquisición, blindaje y rendimiento en un solo volante que impulsa tu patrimonio.</p>
+  </div>
+  <div class="vp" style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:center;margin-top:48px;">
+    <div class="card" style="padding:30px 26px;text-align:center;">
+      <div style="width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto;">◱</div>
+      <h3 class="s" style="font-size:24px;margin:16px 0 0;" data-i18n="vp_1t">Adquirimos</h3>
+      <p style="font-size:14px;line-height:1.6;color:var(--muted);margin:10px 0 0;" data-i18n="vp_1d">Detectamos bienes adjudicados y cesiones por debajo del valor comercial.</p>
+    </div>
+    <div class="vp-arrow" style="color:var(--gold);font-size:22px;">→</div>
+    <div class="card" style="border-color:var(--gold);padding:30px 26px;text-align:center;box-shadow:0 0 0 4px rgba(200,162,74,.06);">
+      <div style="width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto;">◈</div>
+      <h3 class="s" style="font-size:24px;margin:16px 0 0;" data-i18n="vp_2t">Blindamos</h3>
+      <p style="font-size:14px;line-height:1.6;color:var(--muted);margin:10px 0 0;" data-i18n="vp_2d">Jurídico y fiscal incluidos: cada operación queda protegida y en regla.</p>
+    </div>
+    <div class="vp-arrow" style="color:var(--gold);font-size:22px;">→</div>
+    <div class="card" style="padding:30px 26px;text-align:center;">
+      <div style="width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto;">◵</div>
+      <h3 class="s" style="font-size:24px;margin:16px 0 0;" data-i18n="vp_3t">Rentabilizamos</h3>
+      <p style="font-size:14px;line-height:1.6;color:var(--muted);margin:10px 0 0;" data-i18n="vp_3d">Convertimos la oportunidad en plusvalía y patrimonio de largo plazo.</p>
+    </div>
+  </div>
+  <p class="s" style="text-align:center;font-style:italic;font-size:20px;color:var(--gold);margin:38px auto 0;max-width:640px;" data-i18n="vp_note">Cada área alimenta a la siguiente. El volante gira y tu inversión flota por encima del conflicto.</p>
+</section>
+
+<!-- Portal teaser -->
+<section style="background:linear-gradient(120deg,var(--surface2),var(--surface));border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="teaser-grid" style="max-width:1240px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;">
+    <div>
+      <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="pa_eyebrow">Portal de acreditados</div>
+      <h2 class="s" style="font-weight:500;font-size:40px;margin:14px 0 0;" data-i18n="pa_title">Tu inversión, transparente en tiempo real</h2>
+      <p style="font-size:15px;color:var(--muted);margin:14px 0 22px;" data-i18n="pa_sub">Al registrarte e ingresar podrás:</p>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b1">Consultar saldos y pagos</span></div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b2">Descargar estados de cuenta</span></div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b3">Conocer importes y fechas límite</span></div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:15px;"><span style="color:var(--gold);">◆</span><span data-i18n="pa_b4">Levantar aclaraciones y trámites</span></div>
+      </div>
+      <a href="acceso.html"><button class="gbtn" style="margin-top:28px;font-size:15px;padding:14px 30px;" data-i18n="pa_cta">Ingresar al portal</button></a>
+    </div>
+    <div class="card" style="border-color:var(--line);border-radius:18px;padding:26px;box-shadow:0 24px 50px rgba(0,0,0,.4);">
+      <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line2);padding-bottom:14px;">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg>
+        <span class="s" style="font-size:18px;letter-spacing:.14em;">ÓRBITA</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+        <div style="background:var(--surface2);border:1px solid var(--line2);border-radius:12px;padding:16px;"><div style="color:var(--gold);font-size:20px;">◷</div><div style="font-size:13px;margin-top:8px;">Cronos</div><div style="font-size:11px;color:var(--muted);" data-i18n="tz_cronos">Etapas y plazos</div></div>
+        <div style="background:var(--surface2);border:1px solid var(--line2);border-radius:12px;padding:16px;"><div style="color:var(--gold);font-size:20px;">⧉</div><div style="font-size:13px;margin-top:8px;">Bóveda</div><div style="font-size:11px;color:var(--muted);" data-i18n="tz_boveda">Documentos cifrados</div></div>
+        <div style="background:var(--surface2);border:1px solid var(--line2);border-radius:12px;padding:16px;"><div style="color:var(--gold);font-size:20px;">◉</div><div style="font-size:13px;margin-top:8px;">Brújula</div><div style="font-size:11px;color:var(--muted);" data-i18n="tz_brujula">Asesoría en vivo</div></div>
+        <div style="background:var(--surface2);border:1px solid var(--line2);border-radius:12px;padding:16px;"><div style="color:var(--gold);font-size:20px;">◱</div><div style="font-size:13px;margin-top:8px;">Portafolio</div><div style="font-size:11px;color:var(--muted);" data-i18n="tz_port">Tu inversión</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background:var(--surface2);border-top:1px solid var(--line2);">
+  <div style="max-width:1240px;margin:0 auto;padding:44px 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg>
+      <div><div class="s" style="font-size:19px;letter-spacing:.16em;">ALTIORA</div><div style="font-size:11px;color:var(--muted);" data-i18n="ft_tag">Buscamos oportunidades · Ofrecemos soluciones</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);text-align:right;"><span data-i18n="ft_rights">© 2026 Grupo Altiora. Prototipo de demostración. Cifras y logos son placeholders.</span> · <a href="#" data-i18n="ft_priv">Aviso de privacidad</a></div>
+  </div>
+</footer>
+
+<script>
+var HOME_PROPS=[
+ {id:'ALT-0426',tipo:'Casa sola',cat:'adjudicados',ubic:'Roma Norte, CDMX',precio:'$5,363,000',hue:208},
+ {id:'ALT-1903',tipo:'Departamento',cat:'adjudicados',ubic:'Santa Cruz Atoyac, CDMX',precio:'$4,794,000',hue:26},
+ {id:'ALT-2206',tipo:'Casa sola',cat:'cesiones',ubic:'Valle de Aragón, Edo. Méx.',precio:'Consulte precio',hue:158},
+ {id:'ALT-0088',tipo:'Casa en condominio',cat:'adjudicados',ubic:'El Marqués, Querétaro',precio:'$5,856,000',hue:262}
+];
+var I18N={
+ es:{demo:'Prototipo · datos de demostración',u_tel:'55 1084 3500',u_mail:'contacto@altiora.mx',u_invertir:'¿Listo para invertir?',n_inicio:'Inicio',n_nosotros:'Nosotros',n_servicios:'Servicios',n_inversion:'Inversión en bienes',n_portal:'Portal acreditados',n_ingresar:'Ingresar',nd_a:'Conócenos',nd_as:'Nuestra historia',nd_b:'Nuestros pilares',nd_bs:'Valores fundamentales',nd_c:'Filosofía',nd_cs:'Misión y visión',nd_d:'Cobertura nacional',nd_ds:'Presencia en México',nd_e:'Responsabilidad',nd_es:'Compromiso social',nd_f:'Código de ética',nd_fs:'Principios y conducta',sd_a:'Servicios integrales',sd_as:'Inversión con blindaje legal',sd_b:'Certificaciones',sd_bs:'Estándares y calidad',sd_c:'Calificaciones',sd_cs:'Respaldo y confianza',sd_d:'Soluciones tecnológicas',sd_ds:'Portal e innovación',h_eyebrow:'Oportunidades de inversión inmobiliaria',h_title:'Hacemos flotar tu patrimonio por encima de la complejidad.',h_sub:'Bienes adjudicados y cesiones de derechos, con servicios legales y fiscales incluidos. Inversión inmobiliaria con la máxima precisión, seguridad y certidumbre.',h_cta1:'Ver oportunidades',h_cta2:'Acceso acreditados',img_render:'render del inmueble',img_stat:'propiedades activas',f_estado:'Estado',f_municipio:'Municipio',f_tipoinv:'Tipo de inversión',f_tipoinm:'Tipo de inmueble',f_precio:'Precio',f_buscar:'Buscar',f_sel:'Seleccionar…',adj:'Bienes adjudicados',ces:'Cesiones de derechos',tb_1:'años de trayectoria',tb_2:'inmuebles colocados',tb_3:'estados de cobertura',tb_4:'con servicios legales',inv_eyebrow:'Dos caminos para invertir',inv_title:'Inversión en bienes',inv_sub:'Adquiere por debajo del valor comercial y deja que nuestro equipo blinde cada operación de principio a fin.',c1_t:'Cesiones de derechos',c1_d:'Compra los derechos de cobro de un crédito hipotecario en proceso judicial. Al adquirirlo, tomas los derechos litigiosos sobre el inmueble.',c1_bl:'Beneficio clave',c1_b:'Si el proceso concluye a favor, obtienes los derechos sobre el remate del inmueble para su adjudicación.',c2_t:'Bienes adjudicados',c2_d:'Inmuebles obtenidos por mandato judicial o dación en pago. Están listos para su comercialización directa e inmediata.',c2_bl:'Beneficio clave',c2_b:'Precios muy por debajo del valor comercial para quien busca invertir, rentar o revender con plusvalía.',inv_cta:'Explorar el catálogo',cat_eyebrow:'Propiedades disponibles',cat_title:'Un portafolio sólido, con blindaje legal incluido',cat_sub:'Conoce las oportunidades disponibles hoy en el catálogo Altiora.',cat_cta:'Ver catálogo completo',tag_legal:'Servicios legales incluidos',card_avaluo:'Avalúo',vp_eyebrow:'Visión periférica',vp_title:'Un ecosistema que gira solo',vp_sub:'No vendemos propiedades sueltas: conectamos adquisición, blindaje y rendimiento en un solo volante que impulsa tu patrimonio.',vp_1t:'Adquirimos',vp_1d:'Detectamos bienes adjudicados y cesiones por debajo del valor comercial.',vp_2t:'Blindamos',vp_2d:'Jurídico y fiscal incluidos: cada operación queda protegida y en regla.',vp_3t:'Rentabilizamos',vp_3d:'Convertimos la oportunidad en plusvalía y patrimonio de largo plazo.',vp_note:'Cada área alimenta a la siguiente. El volante gira y tu inversión flota por encima del conflicto.',pa_eyebrow:'Portal de acreditados',pa_title:'Tu inversión, transparente en tiempo real',pa_sub:'Al registrarte e ingresar podrás:',pa_b1:'Consultar saldos y pagos',pa_b2:'Descargar estados de cuenta',pa_b3:'Conocer importes y fechas límite',pa_b4:'Levantar aclaraciones y trámites',pa_cta:'Ingresar al portal',tz_cronos:'Etapas y plazos',tz_boveda:'Documentos cifrados',tz_brujula:'Asesoría en vivo',tz_port:'Tu inversión',ft_tag:'Buscamos oportunidades · Ofrecemos soluciones',ft_rights:'© 2026 Grupo Altiora. Prototipo de demostración. Cifras y logos son placeholders.',ft_priv:'Aviso de privacidad'},
+ en:{demo:'Prototype · demonstration data',u_tel:'+52 55 1084 3500',u_mail:'contact@altiora.mx',u_invertir:'Ready to invest?',n_inicio:'Home',n_nosotros:'About',n_servicios:'Services',n_inversion:'Real estate',n_portal:'Client portal',n_ingresar:'Sign in',nd_a:'About us',nd_as:'Our story',nd_b:'Our pillars',nd_bs:'Core values',nd_c:'Philosophy',nd_cs:'Mission & vision',nd_d:'National reach',nd_ds:'Presence in Mexico',nd_e:'Responsibility',nd_es:'Social commitment',nd_f:'Code of ethics',nd_fs:'Principles & conduct',sd_a:'Integral services',sd_as:'Investing with legal shielding',sd_b:'Certifications',sd_bs:'Standards & quality',sd_c:'Ratings',sd_cs:'Backing & trust',sd_d:'Tech solutions',sd_ds:'Portal & innovation',h_eyebrow:'Real estate investment opportunities',h_title:'We float your assets above the complexity.',h_sub:'Adjudicated assets and rights assignments, with legal and tax services included. Real estate investing with maximum precision, security and certainty.',h_cta1:'View opportunities',h_cta2:'Client access',img_render:'property render',img_stat:'active properties',f_estado:'State',f_municipio:'Municipality',f_tipoinv:'Investment type',f_tipoinm:'Property type',f_precio:'Price',f_buscar:'Search',f_sel:'Select…',adj:'Adjudicated assets',ces:'Rights assignments',tb_1:'years of track record',tb_2:'properties placed',tb_3:'states covered',tb_4:'with legal services',inv_eyebrow:'Two paths to invest',inv_title:'Real estate investment',inv_sub:'Acquire below market value and let our team shield every operation end to end.',c1_t:'Rights assignments',c1_d:'Buy the collection rights of a mortgage loan under judicial process. On acquiring it, you take the litigious rights over the property.',c1_bl:'Key benefit',c1_b:'If the process concludes in your favor, you obtain the rights over the property auction for its adjudication.',c2_t:'Adjudicated assets',c2_d:'Properties obtained by judicial mandate or dation in payment. Ready for direct, immediate sale.',c2_bl:'Key benefit',c2_b:'Prices well below market value for those looking to invest, rent or resell with appreciation.',inv_cta:'Explore the catalog',cat_eyebrow:'Available properties',cat_title:'A solid portfolio, with legal shielding included',cat_sub:'See the opportunities available today in the Altiora catalog.',cat_cta:'View full catalog',tag_legal:'Legal services included',card_avaluo:'Appraisal',vp_eyebrow:'Peripheral vision',vp_title:'An ecosystem that spins itself',vp_sub:'We don’t sell isolated properties: we connect acquisition, shielding and yield into one flywheel that drives your wealth.',vp_1t:'We acquire',vp_1d:'We detect adjudicated assets and assignments below market value.',vp_2t:'We shield',vp_2d:'Legal and tax included: every operation stays protected and compliant.',vp_3t:'We monetize',vp_3d:'We turn the opportunity into appreciation and long-term wealth.',vp_note:'Each area feeds the next. The flywheel spins and your investment floats above the conflict.',pa_eyebrow:'Client portal',pa_title:'Your investment, transparent in real time',pa_sub:'Once you register and sign in you can:',pa_b1:'Check balances and payments',pa_b2:'Download account statements',pa_b3:'See amounts and due dates',pa_b4:'Raise clarifications and procedures',pa_cta:'Enter the portal',tz_cronos:'Stages & deadlines',tz_boveda:'Encrypted documents',tz_brujula:'Live advisory',tz_port:'Your investment',ft_tag:'We seek opportunities · We offer solutions',ft_rights:'© 2026 Grupo Altiora. Demonstration prototype. Figures and logos are placeholders.',ft_priv:'Privacy notice'}
+};
+var lang='es';
+function setLang(l){lang=l;var d=I18N[l];document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(d[k]!=null)e.textContent=d[k];});document.getElementById('lang-es').style.color=l==='es'?'var(--gold)':'var(--muted)';document.getElementById('lang-en').style.color=l==='en'?'var(--gold)':'var(--muted)';document.documentElement.lang=l;renderProps();}
+function toggleDrop(id){var el=document.getElementById('drop-'+id);var other=document.getElementById('drop-'+(id==='nosotros'?'servicios':'nosotros'));other.classList.remove('open');el.classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-links')){document.querySelectorAll('.drop').forEach(function(d){d.classList.remove('open');});}});
+function renderProps(){var d=I18N[lang];var html=HOME_PROPS.map(function(p){var catL=p.cat==='adjudicados'?d.adj:d.ces;return '<div onclick="location.href=\'catalogo.html\'" class="card" style="overflow:hidden;cursor:pointer;"><div style="position:relative;aspect-ratio:4/3;background-color:hsl('+p.hue+' 24% 18%);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 12px);display:flex;align-items:center;justify-content:center;"><span style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;">foto propiedad</span><span style="position:absolute;top:10px;right:10px;background:rgba(31,138,91,.92);color:#fff;font-size:9px;letter-spacing:.06em;padding:4px 8px;border-radius:20px;text-transform:uppercase;">'+d.tag_legal+'</span><span style="position:absolute;top:10px;left:10px;background:rgba(8,21,29,.8);color:var(--gold);font-size:10px;font-family:monospace;padding:4px 8px;border-radius:6px;">'+p.id+'</span></div><div style="padding:16px 16px 18px;"><div style="font-size:16px;color:var(--ivory);">'+p.tipo+'</div><div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-top:5px;">'+catL+'</div><div style="font-size:13px;color:var(--muted);margin-top:8px;">'+p.ubic+'</div><div style="height:1px;background:var(--line2);margin:14px 0;"></div><div class="s" style="font-size:24px;color:var(--gold);">'+p.precio+'</div></div></div>';}).join('');document.getElementById('home-props').innerHTML=html;}
+renderProps();
+</script>
 </body>
 </html>

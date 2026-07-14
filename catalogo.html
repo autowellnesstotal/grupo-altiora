@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Altiora — Catálogo de propiedades</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A1A24;--surface:#0F2733;--surface2:#08151D;--gold:#C8A24A;--gold2:#D4AF37;--ivory:#F4F2EC;--muted:#9FB0BA;--line:rgba(200,162,74,.18);--line2:rgba(159,176,186,.14);}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ivory);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+.s{font-family:'Cormorant Garamond',serif;}
+a{color:var(--gold);text-decoration:none;}
+select option{background:#0F2733;color:#F4F2EC;}
+.demo{background:var(--surface2);border-bottom:1px solid var(--line2);text-align:center;padding:6px 12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.gbtn{background:var(--gold);color:#0A1A24;border:none;font-weight:600;cursor:pointer;border-radius:30px;}
+.gbtn:hover{background:var(--gold2);}
+.nlink{background:none;border:none;color:var(--ivory);font-size:14px;padding:9px 13px;cursor:pointer;border-radius:6px;font-family:inherit;}
+.nlink:hover{color:var(--gold);}
+select{width:100%;background:var(--surface2);color:var(--ivory);border:1px solid var(--line2);border-radius:8px;padding:11px 12px;font-size:14px;font-family:inherit;}
+.flabel{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card{background:var(--surface);border:1px solid var(--line2);border-radius:14px;overflow:hidden;transition:transform .2s,border-color .2s;}
+.card:hover{border-color:var(--gold);transform:translateY(-4px);}
+.drop{display:none;position:absolute;left:0;right:0;top:100%;z-index:70;background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 24px 48px rgba(0,0,0,.4);}
+.drop.open{display:block;}
+.ditem{display:flex;gap:14px;padding:14px;border-radius:10px;cursor:pointer;}
+.ditem:hover{background:var(--surface2);}
+@media(max-width:900px){.searchbar{grid-template-columns:1fr 1fr !important;}.grid{grid-template-columns:1fr !important;}.nav-links{display:none !important;}}
+</style>
+</head>
+<body>
+<div class="demo" data-i18n="demo">Prototipo · datos de demostración</div>
+
+<div style="background:var(--surface2);border-bottom:1px solid var(--line2);font-size:13px;">
+  <div style="max-width:1240px;margin:0 auto;padding:9px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:22px;color:var(--muted);">
+      <span style="display:flex;align-items:center;gap:7px;"><span style="color:var(--gold);">✆</span><span data-i18n="u_tel">55 1084 3500</span></span>
+      <span style="display:flex;align-items:center;gap:7px;"><span style="color:var(--gold);">✉</span><span data-i18n="u_mail">contacto@altiora.mx</span></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="color:var(--gold);cursor:pointer;" data-i18n="u_invertir">¿Listo para invertir?</span>
+      <span style="width:1px;height:14px;background:var(--line);"></span>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button onclick="setLang('es')" id="lang-es" style="background:none;border:none;cursor:pointer;font-size:12px;padding:2px 4px;color:var(--gold);">ES</button>
+        <span style="color:var(--line);">/</span>
+        <button onclick="setLang('en')" id="lang-en" style="background:none;border:none;cursor:pointer;font-size:12px;padding:2px 4px;color:var(--muted);">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position:sticky;top:0;z-index:60;background:rgba(10,26,36,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);">
+  <div style="max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="index.html" style="display:flex;align-items:center;gap:13px;">
+      <svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg>
+      <div style="line-height:1;"><div class="s" style="font-size:23px;font-weight:600;letter-spacing:.16em;">ALTIORA</div><div style="font-size:9px;letter-spacing:.34em;color:var(--gold);margin-top:3px;">INMOBILIARIA</div></div>
+    </a>
+    <nav class="nav-links" style="display:flex;align-items:center;gap:6px;">
+      <a href="index.html" class="nlink" data-i18n="n_inicio">Inicio</a>
+      <button class="nlink" onclick="toggleDrop('nosotros')" style="display:flex;align-items:center;gap:6px;"><span data-i18n="n_nosotros">Nosotros</span> <span style="font-size:9px;color:var(--gold);">▾</span></button>
+      <button class="nlink" onclick="toggleDrop('servicios')" style="display:flex;align-items:center;gap:6px;"><span data-i18n="n_servicios">Servicios</span> <span style="font-size:9px;color:var(--gold);">▾</span></button>
+      <a href="catalogo.html" class="nlink" style="color:var(--gold);" data-i18n="n_inversion">Inversión en bienes</a>
+      <a href="acceso.html" class="nlink" data-i18n="n_portal">Portal acreditados</a>
+      <a href="acceso.html"><button class="gbtn" style="margin-left:8px;font-size:14px;padding:11px 22px;" data-i18n="n_ingresar">Ingresar</button></a>
+    </nav>
+  </div>
+  <div id="drop-nosotros" class="drop"><div style="max-width:1240px;margin:0 auto;padding:26px 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◷</span><div><div data-i18n="nd_a">Conócenos</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_as">Nuestra historia</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◆</span><div><div data-i18n="nd_b">Nuestros pilares</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_bs">Valores fundamentales</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">✦</span><div><div data-i18n="nd_c">Filosofía</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_cs">Misión y visión</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◉</span><div><div data-i18n="nd_d">Cobertura nacional</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_ds">Presencia en México</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">❈</span><div><div data-i18n="nd_e">Responsabilidad</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_es">Compromiso social</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">⚖</span><div><div data-i18n="nd_f">Código de ética</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="nd_fs">Principios y conducta</div></div></div>
+  </div></div>
+  <div id="drop-servicios" class="drop"><div style="max-width:1240px;margin:0 auto;padding:26px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">◫</span><div><div data-i18n="sd_a">Servicios integrales</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_as">Inversión con blindaje legal</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">✧</span><div><div data-i18n="sd_b">Certificaciones</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_bs">Estándares y calidad</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">★</span><div><div data-i18n="sd_c">Calificaciones</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_cs">Respaldo y confianza</div></div></div>
+    <div class="ditem"><span style="color:var(--gold);font-size:20px;">⌘</span><div><div data-i18n="sd_d">Soluciones tecnológicas</div><div style="font-size:12px;color:var(--muted);margin-top:3px;" data-i18n="sd_ds">Portal e innovación</div></div></div>
+  </div></div>
+</div>
+
+<section style="background:radial-gradient(900px 400px at 80% -20%,rgba(200,162,74,.10),transparent 60%),var(--surface2);border-bottom:1px solid var(--line2);">
+  <div style="max-width:1240px;margin:0 auto;padding:56px 32px 40px;">
+    <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;" data-i18n="cs_eyebrow">Catálogo</div>
+    <h1 class="s" style="font-weight:500;font-size:46px;margin:14px 0 0;" data-i18n="cs_title">Descubre tu oportunidad de inversión</h1>
+    <p style="font-size:16px;color:var(--muted);margin:12px 0 0;" data-i18n="cs_sub">Filtra por estado, tipo de inversión y presupuesto.</p>
+    <div class="searchbar" style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;grid-template-columns:repeat(5,1fr) auto;gap:12px;align-items:end;margin-top:28px;box-shadow:0 16px 40px rgba(0,0,0,.3);">
+      <label><span class="flabel" data-i18n="f_estado">Estado</span><select><option data-i18n="f_sel">Seleccionar…</option><option>CDMX</option><option>Estado de México</option><option>Querétaro</option><option>Jalisco</option></select></label>
+      <label><span class="flabel" data-i18n="f_municipio">Municipio</span><select><option data-i18n="f_sel">Seleccionar…</option></select></label>
+      <label><span class="flabel" data-i18n="f_tipoinv">Tipo de inversión</span><select><option data-i18n="f_sel">Seleccionar…</option><option data-i18n="adj">Bienes adjudicados</option><option data-i18n="ces">Cesiones de derechos</option></select></label>
+      <label><span class="flabel" data-i18n="f_tipoinm">Tipo de inmueble</span><select><option data-i18n="f_sel">Seleccionar…</option><option>Casa sola</option><option>Departamento</option><option>Terreno</option><option>Local comercial</option></select></label>
+      <label><span class="flabel" data-i18n="f_precio">Precio</span><select><option data-i18n="f_sel">Seleccionar…</option><option>&lt; $3M</option><option>$3M – $5M</option><option>&gt; $5M</option></select></label>
+      <button class="gbtn" style="border-radius:8px;font-size:14px;padding:12px 24px;height:42px;" data-i18n="f_buscar">Buscar</button>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:34px 32px 80px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+    <div style="font-size:14px;color:var(--muted);"><span class="s" style="color:var(--gold);font-size:22px;">6</span> <span data-i18n="cs_results">oportunidades disponibles</span></div>
+    <a href="index.html"><button style="background:none;border:1px solid var(--line);color:var(--muted);font-size:13px;padding:9px 18px;border-radius:20px;cursor:pointer;">← <span data-i18n="cs_back">Volver al inicio</span></button></a>
+  </div>
+  <div class="grid" id="cat-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;"></div>
+</section>
+
+<footer style="background:var(--surface2);border-top:1px solid var(--line);">
+  <div style="max-width:1240px;margin:0 auto;padding:52px 32px 30px;">
+    <div style="text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:12px;"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 2 L22 20 H15 L12 13 L9 20 H2 Z" fill="var(--gold)"></path></svg><span class="s" style="font-size:22px;letter-spacing:.16em;">ALTIORA</span></div>
+      <p class="s" style="font-style:italic;font-size:22px;color:var(--gold);margin:18px 0 0;" data-i18n="ft_tag">Buscamos oportunidades · Ofrecemos soluciones</p>
+    </div>
+    <div style="border-top:1px solid var(--line2);margin-top:32px;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--muted);" data-i18n="ft_rights">© 2026 Grupo Altiora. Prototipo de demostración. Cifras y logos son placeholders.</span>
+      <span style="font-size:12px;color:var(--gold);cursor:pointer;" data-i18n="ft_priv">Aviso de privacidad</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var CAT_PROPS=[
+ {id:'ALT-0426',tipo:'Casa sola',cat:'adjudicados',ubic:'Roma Norte, CDMX',precio:'$5,363,000',avaluo:'$6,180,000',hue:208},
+ {id:'ALT-1903',tipo:'Departamento',cat:'adjudicados',ubic:'Santa Cruz Atoyac, CDMX',precio:'$4,794,000',avaluo:'$5,240,000',hue:26},
+ {id:'ALT-2206',tipo:'Casa sola',cat:'cesiones',ubic:'Valle de Aragón, Edo. Méx.',precio:'Consulte precio',avaluo:'$3,900,000',hue:158},
+ {id:'ALT-0088',tipo:'Casa en condominio',cat:'adjudicados',ubic:'El Marqués, Querétaro',precio:'$5,856,000',avaluo:'$6,400,000',hue:262},
+ {id:'ALT-1725',tipo:'Local comercial',cat:'cesiones',ubic:'Álvaro Obregón, CDMX',precio:'$3,700,000',avaluo:'$4,150,000',hue:14},
+ {id:'ALT-0512',tipo:'Terreno',cat:'adjudicados',ubic:'Zapopan, Jalisco',precio:'$2,293,500',avaluo:'$2,700,000',hue:186}
+];
+var I18N={
+ es:{demo:'Prototipo · datos de demostración',u_tel:'55 1084 3500',u_mail:'contacto@altiora.mx',u_invertir:'¿Listo para invertir?',n_inicio:'Inicio',n_nosotros:'Nosotros',n_servicios:'Servicios',n_inversion:'Inversión en bienes',n_portal:'Portal acreditados',n_ingresar:'Ingresar',nd_a:'Conócenos',nd_as:'Nuestra historia',nd_b:'Nuestros pilares',nd_bs:'Valores fundamentales',nd_c:'Filosofía',nd_cs:'Misión y visión',nd_d:'Cobertura nacional',nd_ds:'Presencia en México',nd_e:'Responsabilidad',nd_es:'Compromiso social',nd_f:'Código de ética',nd_fs:'Principios y conducta',sd_a:'Servicios integrales',sd_as:'Inversión con blindaje legal',sd_b:'Certificaciones',sd_bs:'Estándares y calidad',sd_c:'Calificaciones',sd_cs:'Respaldo y confianza',sd_d:'Soluciones tecnológicas',sd_ds:'Portal e innovación',f_estado:'Estado',f_municipio:'Municipio',f_tipoinv:'Tipo de inversión',f_tipoinm:'Tipo de inmueble',f_precio:'Precio',f_buscar:'Buscar',f_sel:'Seleccionar…',adj:'Bienes adjudicados',ces:'Cesiones de derechos',cs_eyebrow:'Catálogo',cs_title:'Descubre tu oportunidad de inversión',cs_sub:'Filtra por estado, tipo de inversión y presupuesto.',cs_results:'oportunidades disponibles',cs_back:'Volver al inicio',tag_legal:'Servicios legales incluidos',card_avaluo:'Avalúo',card_ver:'Ver detalle',ft_tag:'Buscamos oportunidades · Ofrecemos soluciones',ft_rights:'© 2026 Grupo Altiora. Prototipo de demostración. Cifras y logos son placeholders.',ft_priv:'Aviso de privacidad'},
+ en:{demo:'Prototype · demonstration data',u_tel:'+52 55 1084 3500',u_mail:'contact@altiora.mx',u_invertir:'Ready to invest?',n_inicio:'Home',n_nosotros:'About',n_servicios:'Services',n_inversion:'Real estate',n_portal:'Client portal',n_ingresar:'Sign in',nd_a:'About us',nd_as:'Our story',nd_b:'Our pillars',nd_bs:'Core values',nd_c:'Philosophy',nd_cs:'Mission & vision',nd_d:'National reach',nd_ds:'Presence in Mexico',nd_e:'Responsibility',nd_es:'Social commitment',nd_f:'Code of ethics',nd_fs:'Principles & conduct',sd_a:'Integral services',sd_as:'Investing with legal shielding',sd_b:'Certifications',sd_bs:'Standards & quality',sd_c:'Ratings',sd_cs:'Backing & trust',sd_d:'Tech solutions',sd_ds:'Portal & innovation',f_estado:'State',f_municipio:'Municipality',f_tipoinv:'Investment type',f_tipoinm:'Property type',f_precio:'Price',f_buscar:'Search',f_sel:'Select…',adj:'Adjudicated assets',ces:'Rights assignments',cs_eyebrow:'Catalog',cs_title:'Discover your investment opportunity',cs_sub:'Filter by state, investment type and budget.',cs_results:'opportunities available',cs_back:'Back to home',tag_legal:'Legal services included',card_avaluo:'Appraisal',card_ver:'View detail',ft_tag:'We seek opportunities · We deliver solutions',ft_rights:'© 2026 Grupo Altiora. Demonstration prototype. Figures and logos are placeholders.',ft_priv:'Privacy notice'}
+};
+var lang='es';
+function setLang(l){lang=l;var d=I18N[l];document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(d[k]!=null)e.textContent=d[k];});document.getElementById('lang-es').style.color=l==='es'?'var(--gold)':'var(--muted)';document.getElementById('lang-en').style.color=l==='en'?'var(--gold)':'var(--muted)';document.documentElement.lang=l;renderCat();}
+function toggleDrop(id){var el=document.getElementById('drop-'+id);var o=document.getElementById('drop-'+(id==='nosotros'?'servicios':'nosotros'));o.classList.remove('open');el.classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-links')){document.querySelectorAll('.drop').forEach(function(d){d.classList.remove('open');});}});
+function renderCat(){var d=I18N[lang];document.getElementById('cat-grid').innerHTML=CAT_PROPS.map(function(p){var c=p.cat==='adjudicados'?d.adj:d.ces;return '<div class="card"><div style="position:relative;aspect-ratio:16/10;background-color:hsl('+p.hue+' 24% 18%);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 12px);display:flex;align-items:center;justify-content:center;"><span style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;">foto propiedad</span><span style="position:absolute;top:12px;right:12px;background:rgba(31,138,91,.92);color:#fff;font-size:9px;padding:4px 9px;border-radius:20px;text-transform:uppercase;">'+d.tag_legal+'</span><span style="position:absolute;top:12px;left:12px;background:rgba(8,21,29,.8);color:var(--gold);font-size:10px;font-family:monospace;padding:4px 9px;border-radius:6px;">'+p.id+'</span></div><div style="padding:18px 18px 20px;"><div style="font-size:17px;color:var(--ivory);">'+p.tipo+'</div><div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-top:5px;">'+c+'</div><div style="font-size:13px;color:var(--muted);margin-top:8px;">'+p.ubic+'</div><div style="height:1px;background:var(--line2);margin:14px 0;"></div><div style="display:flex;align-items:flex-end;justify-content:space-between;"><div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">'+d.card_avaluo+': '+p.avaluo+'</div><div class="s" style="font-size:26px;color:var(--gold);line-height:1.1;">'+p.precio+'</div></div><button style="background:transparent;border:1px solid var(--line);color:var(--ivory);font-size:12px;padding:8px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;">'+d.card_ver+'</button></div></div></div>';}).join('');}
+renderCat();
+</script>
+</body>
+</html>
