@@ -19,3 +19,5 @@ Maqueta estática (HTML/CSS) del sitio web propuesto para **Grupo Altiora**
 - Publicado con GitHub Pages para revisión interna.
 
 © 2026 Grupo Altiora · CDMX
+
+- Deploy: automático vía webhook de Easypanel (cada push a main redepliega).
