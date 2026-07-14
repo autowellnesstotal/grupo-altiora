@@ -16,7 +16,7 @@ Maqueta estática (HTML/CSS) del sitio web propuesto para **Grupo Altiora**
 
 - Cifras, logos y nombres son **datos de demostración** (no reales).
 - Páginas marcadas `noindex` para no aparecer en buscadores.
-- Publicado con GitHub Pages para revisión interna.
+- Desplegado en VPS Hostinger (Easypanel) -> grupoaltiora.cloud.
 
 © 2026 Grupo Altiora · CDMX
 
