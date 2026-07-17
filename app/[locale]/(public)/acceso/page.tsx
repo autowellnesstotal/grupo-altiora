@@ -19,10 +19,7 @@ export default async function AccesoPage({
   return (
     <section className="max-w-[1240px] mx-auto px-4 sm:px-8 py-14 sm:py-16 grid lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-14 items-center">
       <div className="border-l-[3px] border-gold pl-6">
-        <div className="text-xs tracking-[0.28em] uppercase text-gold font-medium">
-          {t("eyebrow")}
-        </div>
-        <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)] mt-3.5">
+        <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)]">
           {t("welcome")}
         </h1>
         <p className="text-base leading-[1.7] text-muted mt-4 max-w-[480px]">{t("intro")}</p>

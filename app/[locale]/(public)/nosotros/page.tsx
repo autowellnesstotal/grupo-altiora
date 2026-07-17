@@ -7,17 +7,10 @@ export async function generateMetadata() {
   return { title: t("s1_t") };
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-xs tracking-[0.28em] uppercase text-gold font-medium">{children}</div>
-  );
-}
-
-function SectionHead({ id, title, sub }: { id: string; title: string; sub: string }) {
+function SectionHead({ id, title }: { id: string; title: string }) {
   return (
     <div id={id} className="scroll-mt-28">
-      <Eyebrow>{sub}</Eyebrow>
-      <h2 className="font-serif font-medium text-[clamp(26px,3.5vw,36px)] mt-2.5">{title}</h2>
+      <h2 className="font-serif font-medium text-[clamp(26px,3.5vw,36px)]">{title}</h2>
     </div>
   );
 }
@@ -43,8 +36,7 @@ export default async function NosotrosPage({
     <>
       <section className="bg-[radial-gradient(900px_400px_at_80%_-20%,rgba(200,162,74,0.10),transparent_60%),var(--color-surface2)] border-b border-line2">
         <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-12 pb-9">
-          <Eyebrow>{t("eyebrow")}</Eyebrow>
-          <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)] mt-3.5">{t("title")}</h1>
+          <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)]">{t("title")}</h1>
           <p className="text-base text-muted mt-3 max-w-[640px]">{t("sub")}</p>
         </div>
       </section>
@@ -52,7 +44,7 @@ export default async function NosotrosPage({
       <div className="max-w-[1080px] mx-auto px-4 sm:px-8">
         {/* Conócenos */}
         <section className="py-14 border-b border-line2">
-          <SectionHead id="conocenos" title={t("s1_t")} sub={t("s1_st")} />
+          <SectionHead id="conocenos" title={t("s1_t")} />
           <div className="grid md:grid-cols-2 gap-8 mt-6 text-[15px] leading-[1.75] text-muted">
             <p>{t("s1_p1")}</p>
             <p className="border-l-[3px] border-gold pl-5">{t("s1_p2")}</p>
@@ -61,7 +53,7 @@ export default async function NosotrosPage({
 
         {/* Pilares */}
         <section className="py-14 border-b border-line2">
-          <SectionHead id="pilares" title={t("s2_t")} sub={t("s2_st")} />
+          <SectionHead id="pilares" title={t("s2_t")} />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-7">
             {pilares.map(([icon, title, desc]) => (
               <div key={title} className="bg-surface border border-line2 rounded-2xl p-6">
@@ -77,14 +69,14 @@ export default async function NosotrosPage({
 
         {/* Filosofía */}
         <section className="py-14 border-b border-line2">
-          <SectionHead id="filosofia" title={t("s3_t")} sub={t("s3_st")} />
+          <SectionHead id="filosofia" title={t("s3_t")} />
           <div className="grid md:grid-cols-2 gap-4 mt-7">
             <div className="bg-surface border border-line2 rounded-2xl p-6">
-              <div className="text-xs tracking-[0.2em] uppercase text-gold">{t("mision_t")}</div>
+              <h3 className="font-serif text-xl text-ivory">{t("mision_t")}</h3>
               <p className="text-[15px] leading-[1.7] text-ivory mt-3">{t("mision")}</p>
             </div>
             <div className="bg-surface border border-line2 rounded-2xl p-6">
-              <div className="text-xs tracking-[0.2em] uppercase text-gold">{t("vision_t")}</div>
+              <h3 className="font-serif text-xl text-ivory">{t("vision_t")}</h3>
               <p className="text-[15px] leading-[1.7] text-ivory mt-3">{t("vision")}</p>
             </div>
           </div>
@@ -99,7 +91,7 @@ export default async function NosotrosPage({
 
         {/* Cobertura */}
         <section className="py-14 border-b border-line2">
-          <SectionHead id="cobertura" title={t("s4_t")} sub={t("s4_st")} />
+          <SectionHead id="cobertura" title={t("s4_t")} />
           <div className="flex flex-wrap items-center gap-8 mt-6">
             <div className="font-serif text-[64px] text-gold leading-none">18</div>
             <p className="text-[15px] leading-[1.75] text-muted max-w-[560px]">{t("s4_p1")}</p>
@@ -108,13 +100,13 @@ export default async function NosotrosPage({
 
         {/* Responsabilidad */}
         <section className="py-14 border-b border-line2">
-          <SectionHead id="responsabilidad" title={t("s5_t")} sub={t("s5_st")} />
+          <SectionHead id="responsabilidad" title={t("s5_t")} />
           <p className="text-[15px] leading-[1.75] text-muted mt-6 max-w-[720px]">{t("s5_p1")}</p>
         </section>
 
         {/* Ética */}
         <section className="py-14 pb-20">
-          <SectionHead id="etica" title={t("s6_t")} sub={t("s6_st")} />
+          <SectionHead id="etica" title={t("s6_t")} />
           <ul className="grid sm:grid-cols-2 gap-3.5 mt-7">
             {[t("e1"), t("e2"), t("e3"), t("e4"), t("e5"), t("e6")].map((e) => (
               <li

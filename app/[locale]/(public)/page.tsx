@@ -7,12 +7,6 @@ import { LogoMark } from "@/components/Logo";
 
 export const revalidate = 3600;
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-xs tracking-[0.28em] uppercase text-gold font-medium">{children}</div>
-  );
-}
-
 export default async function HomePage({
   params,
 }: {
@@ -42,8 +36,7 @@ export default async function HomePage({
       <section className="relative bg-[radial-gradient(1100px_500px_at_78%_-10%,rgba(200,162,74,0.10),transparent_60%),linear-gradient(180deg,var(--color-navy),var(--color-surface2))]">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 pt-14 sm:pt-[70px] pb-10 grid lg:grid-cols-[1.05fr_.95fr] gap-10 lg:gap-[52px] items-center">
           <div>
-            <Eyebrow>{t("eyebrow")}</Eyebrow>
-            <h1 className="font-serif font-medium text-[clamp(34px,6vw,58px)] leading-[1.06] mt-5 text-ivory text-balance">
+            <h1 className="font-serif font-medium text-[clamp(34px,6vw,58px)] leading-[1.06] text-ivory text-balance">
               {t("title")}
             </h1>
             <p className="text-[17px] leading-[1.7] text-muted max-w-[520px] mt-5">{t("sub")}</p>
@@ -96,8 +89,7 @@ export default async function HomePage({
       {/* Inversión en bienes */}
       <section className="max-w-[1240px] mx-auto px-4 sm:px-8 py-16 sm:py-[78px]">
         <div className="text-center max-w-[640px] mx-auto">
-          <Eyebrow>{t("inv_eyebrow")}</Eyebrow>
-          <h2 className="font-serif font-medium text-[clamp(30px,4.5vw,44px)] mt-4 text-ivory">
+          <h2 className="font-serif font-medium text-[clamp(30px,4.5vw,44px)] text-ivory">
             {t("inv_title")}
           </h2>
           <p className="text-base leading-[1.7] text-muted mt-4">{t("inv_sub")}</p>
@@ -141,8 +133,7 @@ export default async function HomePage({
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 py-16">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div className="max-w-[620px]">
-              <Eyebrow>{t("cat_eyebrow")}</Eyebrow>
-              <h2 className="font-serif font-medium text-[clamp(28px,4vw,40px)] mt-3.5 text-ivory">
+              <h2 className="font-serif font-medium text-[clamp(28px,4vw,40px)] text-ivory">
                 {t("cat_title")}
               </h2>
               <p className="text-[15px] text-muted mt-3">{t("cat_sub")}</p>
@@ -162,8 +153,7 @@ export default async function HomePage({
       {/* Visión Periférica */}
       <section className="max-w-[1240px] mx-auto px-4 sm:px-8 py-16 sm:py-[82px]">
         <div className="text-center max-w-[660px] mx-auto">
-          <Eyebrow>{t("vp_eyebrow")}</Eyebrow>
-          <h2 className="font-serif font-medium text-[clamp(30px,4.5vw,44px)] mt-4">
+          <h2 className="font-serif font-medium text-[clamp(30px,4.5vw,44px)]">
             {t("vp_title")}
           </h2>
           <p className="text-base leading-[1.7] text-muted mt-4">{t("vp_sub")}</p>
@@ -209,8 +199,7 @@ export default async function HomePage({
       <section className="bg-gradient-to-br from-surface2 to-surface border-y border-line">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 py-16 grid lg:grid-cols-2 gap-10 lg:gap-[52px] items-center">
           <div>
-            <Eyebrow>{t("pa_eyebrow")}</Eyebrow>
-            <h2 className="font-serif font-medium text-[clamp(28px,4vw,40px)] mt-3.5">
+            <h2 className="font-serif font-medium text-[clamp(28px,4vw,40px)]">
               {t("pa_title")}
             </h2>
             <p className="text-[15px] text-muted mt-3.5 mb-5">{t("pa_sub")}</p>

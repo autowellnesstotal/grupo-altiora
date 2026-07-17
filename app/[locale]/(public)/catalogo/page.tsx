@@ -25,10 +25,7 @@ export default async function CatalogoPage({
     <>
       <section className="bg-[radial-gradient(900px_400px_at_80%_-20%,rgba(200,162,74,0.10),transparent_60%),var(--color-surface2)] border-b border-line2">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 pt-12 pb-8">
-          <div className="text-xs tracking-[0.28em] uppercase text-gold font-medium">
-            {t("eyebrow")}
-          </div>
-          <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)] mt-3.5">
+          <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)]">
             {t("title")}
           </h1>
           <p className="text-base text-muted mt-3">{t("sub")}</p>
