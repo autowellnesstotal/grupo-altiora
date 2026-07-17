@@ -16,9 +16,20 @@ export default async function UsuariosPage({
   const { session } = await requireRole("admin");
   const t = await getTranslations("portal");
 
-  const users = await prisma.user.findMany({
-    orderBy: { createdAt: "asc" },
-    select: { id: true, name: true, email: true, role: true, banned: true, createdAt: true },
+  const [users, activity] = await Promise.all([
+    prisma.user.findMany({
+      orderBy: { createdAt: "asc" },
+      select: { id: true, name: true, email: true, role: true, banned: true, createdAt: true },
+    }),
+    prisma.auditLog.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 30,
+      include: { user: { select: { name: true } } },
+    }),
+  ]);
+  const fmtWhen = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "es-MX", {
+    dateStyle: "short",
+    timeStyle: "short",
   });
 
   const roleLabel = (r: string) =>
@@ -88,6 +99,41 @@ export default async function UsuariosPage({
                       </button>
                     </form>
                   )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 className="font-serif font-medium text-[24px] mt-10 mb-4">{t("audit_t")}</h2>
+      <div className="bg-surface border border-line2 rounded-xl overflow-hidden overflow-x-auto">
+        <table className="w-full text-[13px] min-w-[640px]">
+          <thead>
+            <tr className="bg-surface2 text-[11px] tracking-[0.08em] uppercase text-muted text-left">
+              <th className="px-4 py-3 font-normal">{t("audit_cuando")}</th>
+              <th className="px-4 py-3 font-normal">{t("audit_quien")}</th>
+              <th className="px-4 py-3 font-normal">{t("audit_que")}</th>
+              <th className="px-4 py-3 font-normal">{t("audit_sobre")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {activity.map((a) => (
+              <tr key={a.id} className="border-t border-line2">
+                <td className="px-4 py-2.5 text-muted whitespace-nowrap">
+                  {fmtWhen.format(a.createdAt)}
+                </td>
+                <td className="px-4 py-2.5">{a.user?.name ?? "—"}</td>
+                <td className="px-4 py-2.5">
+                  <span
+                    className={`font-mono text-[11px] ${a.action.includes("denegado") ? "text-red-400" : a.action.includes("delete") || a.action.includes("ban") ? "text-[#f0b429]" : "text-muted"}`}
+                  >
+                    {a.action}
+                  </span>
+                </td>
+                <td className="px-4 py-2.5 text-muted">
+                  {a.entity}
+                  {a.detail ? ` · ${a.detail}` : ""}
                 </td>
               </tr>
             ))}

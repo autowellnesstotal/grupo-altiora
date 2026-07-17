@@ -1,7 +1,8 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/session";
+import { canEditProperty } from "@/lib/permissions";
 import { PropertyForm } from "@/components/PropertyForm";
 
 export const dynamic = "force-dynamic";
@@ -13,13 +14,15 @@ export default async function EditarPropiedadPage({
 }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
-  await requireRole("agente", "admin");
+  const { session, role } = await requireRole("agente", "admin");
 
   const property = await prisma.property.findUnique({
     where: { id },
     include: { images: { orderBy: { order: "asc" } } },
   });
   if (!property) notFound();
+  // Antisabotaje: solo el dueño (según política) o el admin abren la edición
+  if (!canEditProperty(role, session.user.id, property)) redirect("/portal/inventario");
 
   const [t, tc] = await Promise.all([getTranslations("portal"), getTranslations("common")]);
 

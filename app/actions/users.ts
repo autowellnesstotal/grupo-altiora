@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { requireRole } from "@/lib/session";
+import { audit } from "@/lib/permissions";
 import type { ActionState } from "./properties";
 
 const createUserSchema = z.object({
@@ -50,12 +51,14 @@ export async function createPortalUser(
     };
   }
 
+  const { session } = await requireRole("admin");
+  await audit(session.user.id, "user.create", parsed.data.email, parsed.data.role);
   revalidatePath("/portal/admin/usuarios");
   return { ok: true };
 }
 
 export async function setUserBanned(formData: FormData) {
-  await requireRole("admin");
+  const { session } = await requireRole("admin");
   const userId = z.string().min(8).parse(formData.get("userId"));
   const banned = formData.get("banned") === "true";
   const h = await headers();
@@ -64,5 +67,6 @@ export async function setUserBanned(formData: FormData) {
   } else {
     await auth.api.unbanUser({ body: { userId }, headers: h });
   }
+  await audit(session.user.id, banned ? "user.ban" : "user.unban", userId);
   revalidatePath("/portal/admin/usuarios");
 }

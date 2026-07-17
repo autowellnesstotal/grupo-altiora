@@ -28,6 +28,7 @@ model User {
   threads    MessageThread[]
   messages   Message[]
   statements Statement[]
+  audits     AuditLog[]
 
   @@map("user")
 }
@@ -180,6 +181,19 @@ model Statement {
 
   @@index([userId])
   @@map("statement")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String // property.create | property.update | property.publish | property.unpublish | property.delete | user.create | user.ban | user.unban | document.upload
+  entity    String // clave ALT-XXXX, email del usuario, etc.
+  detail    String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("audit_log")
 }
 
 model StatementLine {

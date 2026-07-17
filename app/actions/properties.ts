@@ -7,6 +7,13 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/session";
 import { savePropertyImage } from "@/lib/uploads";
 import { CATALOG_TAG, slugify } from "@/lib/catalog";
+import {
+  agentPolicy,
+  audit,
+  canDeleteProperty,
+  canEditProperty,
+  canPublishProperty,
+} from "@/lib/permissions";
 
 const propertySchema = z.object({
   tipo: z.enum(["Casa sola", "Departamento", "Casa en condominio", "Terreno", "Local comercial"]),
@@ -40,7 +47,8 @@ export async function upsertProperty(
   _prev: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const { session } = await requireRole("agente", "admin");
+  const { session, role } = await requireRole("agente", "admin");
+  const userId = session.user.id;
 
   const parsed = propertySchema.safeParse(Object.fromEntries(formData.entries()));
   if (!parsed.success) {
@@ -48,7 +56,6 @@ export async function upsertProperty(
   }
   const data = parsed.data;
 
-  // Fotos (opcionales): validadas y re-encodeadas por sharp
   const files = formData
     .getAll("fotos")
     .filter((f): f is File => f instanceof File && f.size > 0)
@@ -65,6 +72,11 @@ export async function upsertProperty(
   if (id) {
     const existing = await prisma.property.findUnique({ where: { id } });
     if (!existing) return { ok: false, message: "Propiedad no encontrada." };
+    // Control de sabotaje: solo el dueño (según política) o el admin editan
+    if (!canEditProperty(role, userId, existing)) {
+      await audit(userId, "property.update.denegado", existing.clave);
+      return { ok: false, message: "No tienes permiso para editar esta propiedad." };
+    }
     await prisma.property.update({
       where: { id },
       data: {
@@ -76,9 +88,10 @@ export async function upsertProperty(
           : undefined,
       },
     });
+    await audit(userId, "property.update", existing.clave);
   } else {
     const clave = await uniqueClave();
-    const created = await prisma.property.create({
+    await prisma.property.create({
       data: {
         ...data,
         precio: data.precio ?? null,
@@ -86,11 +99,11 @@ export async function upsertProperty(
         clave,
         slug: `${slugify(data.tipo)}-${slugify(data.ubicacion)}-${clave.toLowerCase()}`,
         hue: Math.floor(Math.random() * 360),
-        createdById: session.user.id,
+        createdById: userId,
         images: { create: saved.map((s, i) => ({ ...s, order: i })) },
       },
     });
-    id = created.id;
+    await audit(userId, "property.create", clave, data.ubicacion);
   }
 
   invalidatePublic();
@@ -99,18 +112,48 @@ export async function upsertProperty(
 }
 
 export async function setPropertyStatus(formData: FormData) {
-  await requireRole("agente", "admin");
+  const { session, role } = await requireRole("agente", "admin");
+  const userId = session.user.id;
   const id = z.string().cuid().parse(formData.get("id"));
   const status = z.enum(["BORRADOR", "PUBLICADA"]).parse(formData.get("status"));
+
+  const existing = await prisma.property.findUnique({ where: { id } });
+  if (!existing) return;
+  if (!canPublishProperty(role, userId, existing)) {
+    await audit(userId, "property.status.denegado", existing.clave, status);
+    return;
+  }
+
   await prisma.property.update({ where: { id }, data: { status } });
+  await audit(
+    userId,
+    status === "PUBLICADA" ? "property.publish" : "property.unpublish",
+    existing.clave
+  );
   invalidatePublic();
   revalidatePath("/portal/inventario");
 }
 
 export async function deleteProperty(formData: FormData) {
-  await requireRole("agente", "admin");
+  const { session, role } = await requireRole("agente", "admin");
+  const userId = session.user.id;
   const id = z.string().cuid().parse(formData.get("id"));
+
+  const existing = await prisma.property.findUnique({ where: { id } });
+  if (!existing) return;
+  if (!canDeleteProperty(role, userId, existing)) {
+    await audit(userId, "property.delete.denegado", existing.clave);
+    return;
+  }
+
   await prisma.property.delete({ where: { id } });
+  await audit(userId, "property.delete", existing.clave, existing.ubicacion);
   invalidatePublic();
   revalidatePath("/portal/inventario");
+}
+
+/** Capacidades del usuario actual sobre cada propiedad (para pintar la UI). */
+export async function getPropertyCapabilities() {
+  const { session, role } = await requireRole("agente", "admin");
+  return { userId: session.user.id, role, policy: agentPolicy() };
 }

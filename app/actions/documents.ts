@@ -5,10 +5,11 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/session";
 import { saveDocumentPdf } from "@/lib/uploads";
+import { audit } from "@/lib/permissions";
 import type { ActionState } from "./properties";
 
 export async function uploadDocument(_prev: ActionState, formData: FormData): Promise<ActionState> {
-  await requireRole("agente", "admin");
+  const { session } = await requireRole("agente", "admin");
 
   const propertyId = z.string().cuid().safeParse(formData.get("propertyId"));
   const title = z.string().trim().min(2).max(120).safeParse(formData.get("title"));
@@ -29,6 +30,7 @@ export async function uploadDocument(_prev: ActionState, formData: FormData): Pr
     return { ok: false, message: e instanceof Error ? e.message : "Error al subir el PDF." };
   }
 
+  await audit(session.user.id, "document.upload", property.clave, title.data);
   revalidatePath("/portal/boveda");
   return { ok: true };
 }
