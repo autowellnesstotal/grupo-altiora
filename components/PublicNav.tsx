@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { LogoMark } from "./Logo";
 import { LangSwitch } from "./LangSwitch";
 import { NavDropdown } from "./NavDropdown";
+import { ThemeToggle } from "./ThemeToggle";
 
 function DropItem({
   icon,
@@ -50,6 +51,8 @@ export async function PublicNav() {
             <span className="text-gold hidden sm:inline">{t("ready")}</span>
             <span className="w-px h-3.5 bg-line hidden sm:block" />
             <LangSwitch />
+            <span className="w-px h-3.5 bg-line" />
+            <ThemeToggle label={t("theme_toggle")} />
           </div>
         </div>
       </div>

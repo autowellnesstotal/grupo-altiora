@@ -56,7 +56,7 @@ export default async function HomePage({
             </div>
           </div>
           <div className="relative">
-            <div className="relative aspect-[4/3] rounded-2xl border border-line overflow-hidden photo-ph bg-[hsl(205_26%_16%)] flex items-center justify-center">
+            <div className="relative aspect-[4/3] rounded-2xl border border-line overflow-hidden photo-ph bg-surface flex items-center justify-center">
               <span className="font-mono text-xs tracking-[0.12em] text-muted uppercase">
                 {t("img_render")}
               </span>
@@ -97,12 +97,12 @@ export default async function HomePage({
         <div className="grid md:grid-cols-2 gap-6 mt-11">
           {(
             [
-              ["01", t("c1_t"), t("c1_d"), t("c1_bl"), t("c1_b"), "from-[#0F2733] to-[#08151D]"],
-              ["02", t("c2_t"), t("c2_d"), t("c2_bl"), t("c2_b"), "from-[#2a1c0e] to-[#1a1207]"],
+              ["01", t("c1_t"), t("c1_d"), t("c1_bl"), t("c1_b"), "card-grad-a"],
+              ["02", t("c2_t"), t("c2_d"), t("c2_bl"), t("c2_b"), "card-grad-b"],
             ] as const
           ).map(([num, title, desc, benefitLabel, benefit, grad]) => (
             <div key={num} className="bg-surface border border-line2 rounded-2xl overflow-hidden">
-              <div className={`px-8 py-9 bg-gradient-to-br ${grad} border-b-2 border-gold`}>
+              <div className={`px-8 py-9 ${grad} border-b-2 border-gold`}>
                 <div className="text-[11px] tracking-[0.2em] uppercase text-gold">{num}</div>
                 <h3 className="font-serif font-semibold text-[30px] mt-2.5">{title}</h3>
               </div>

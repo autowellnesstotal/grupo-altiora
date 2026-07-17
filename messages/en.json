@@ -1,6 +1,7 @@
 {
   "common": {
     "demo": "Prototype · demonstration data",
+    "theme_toggle": "Toggle light/dark theme",
     "tel": "+52 55 1084 3500",
     "mail": "contact@altiora.mx",
     "ready": "Ready to invest?",

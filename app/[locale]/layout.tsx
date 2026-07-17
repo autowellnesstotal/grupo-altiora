@@ -45,7 +45,20 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${cormorant.variable} ${inter.variable}`}>
+    <html
+      lang={locale}
+      className={`${cormorant.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Aplica el tema guardado antes del primer paint (evita flash) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{localStorage.theme==="light"&&document.documentElement.classList.add("light")}catch(e){}',
+          }}
+        />
+      </head>
       <body>
         {/* Sin `messages`: los textos van por props a las islas de cliente (bundle mínimo) */}
         <NextIntlClientProvider>{children}</NextIntlClientProvider>

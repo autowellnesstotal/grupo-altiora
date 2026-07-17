@@ -1,6 +1,7 @@
 {
   "common": {
     "demo": "Prototipo · datos de demostración",
+    "theme_toggle": "Cambiar tema claro/oscuro",
     "tel": "55 1084 3500",
     "mail": "contacto@altiora.mx",
     "ready": "¿Listo para invertir?",

@@ -14,11 +14,39 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
+/* Modo claro (Marfil Mármol, BRANDING.md): mismos tokens, valores invertidos.
+   El oro baja de luminosidad para mantener contraste AA sobre marfil. */
+.light {
+  --color-navy: #f4f2ec;
+  --color-surface: #ffffff;
+  --color-surface2: #ebe8df;
+  --color-gold: #a07f2c;
+  --color-gold2: #8a6d24;
+  --color-ivory: #14110f;
+  --color-muted: #5c6b74;
+  --color-line: rgba(160, 127, 44, 0.35);
+  --color-line2: rgba(20, 17, 15, 0.12);
+}
+
 body {
   background: var(--color-navy);
   color: var(--color-ivory);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Gradientes de las tarjetas de inversión de la home (adjudicados / cesiones) */
+.card-grad-a {
+  background: linear-gradient(to bottom right, #0f2733, #08151d);
+}
+.card-grad-b {
+  background: linear-gradient(to bottom right, #2a1c0e, #1a1207);
+}
+.light .card-grad-a {
+  background: linear-gradient(to bottom right, #e3e9ec, #d2dce1);
+}
+.light .card-grad-b {
+  background: linear-gradient(to bottom right, #ede2cb, #e2d3b1);
 }
 
 select option {
@@ -31,6 +59,13 @@ select option {
   background-image: repeating-linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.04) 0 2px,
+    transparent 2px 12px
+  );
+}
+.light .photo-ph {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(20, 17, 15, 0.05) 0 2px,
     transparent 2px 12px
   );
 }

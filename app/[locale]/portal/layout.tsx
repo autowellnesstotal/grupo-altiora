@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { getSession, userRole } from "@/lib/session";
 import { LogoMark } from "@/components/Logo";
 import { SignOutButton } from "@/components/SignOutButton";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,10 @@ export default async function PortalLayout({
   if (!session) redirect("/acceso");
   if ((session.user as { banned?: boolean }).banned) redirect("/acceso");
   const role = userRole(session);
-  const t = await getTranslations("portal");
+  const [t, tc] = await Promise.all([
+    getTranslations("portal"),
+    getTranslations("common"),
+  ]);
 
   const items: { href: string; icon: string; label: string }[] = [];
   if (role === "agente" || role === "admin") {
@@ -64,6 +68,7 @@ export default async function PortalLayout({
             </span>
             {session.user.name} · {t(`role_${role}`)}
           </span>
+          <ThemeToggle label={tc("theme_toggle")} />
           <SignOutButton label={t("out")} />
         </div>
       </div>
