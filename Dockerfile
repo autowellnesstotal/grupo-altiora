@@ -15,10 +15,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # se regeneran al primer request en runtime.
 RUN npx prisma generate && npm run build
 
-# ---- migraciones (CLI de prisma aislado, para migrate deploy al arrancar) ----
+# ---- migraciones + seed (prisma CLI y better-auth para hashear passwords) ----
 FROM node:24-alpine AS migrator
 WORKDIR /mig
-RUN npm init -y >/dev/null 2>&1 && npm install prisma@6 @prisma/client@6 >/dev/null 2>&1
+RUN npm init -y >/dev/null 2>&1 && npm install prisma@6 @prisma/client@6 better-auth@1 >/dev/null 2>&1
 
 # ---- runner ----
 FROM node:24-alpine AS runner
@@ -31,7 +31,11 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=migrator /mig/node_modules ./mig/node_modules
 COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x ./entrypoint.sh && mkdir -p /data/uploads && chown -R nextjs:nodejs /data /app
+# Enlazar paquetes de mig que el trace de standalone no incluyó (p. ej. better-auth
+# para el seed): solo los ausentes, sin tocar los trazados por Next.
+RUN for d in /app/mig/node_modules/*; do b=$(basename "$d"); \
+      [ -e "/app/node_modules/$b" ] || ln -s "$d" "/app/node_modules/$b"; done && \
+    chmod +x ./entrypoint.sh && mkdir -p /data/uploads && chown -R nextjs:nodejs /data /app
 USER nextjs
 EXPOSE 3000
 CMD ["./entrypoint.sh"]
