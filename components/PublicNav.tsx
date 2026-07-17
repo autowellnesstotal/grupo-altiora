@@ -3,15 +3,25 @@ import { Link } from "@/i18n/navigation";
 import { LogoMark } from "./Logo";
 import { LangSwitch } from "./LangSwitch";
 
-function DropItem({ icon, title, sub }: { icon: string; title: string; sub: string }) {
+function DropItem({
+  icon,
+  title,
+  sub,
+  href,
+}: {
+  icon: string;
+  title: string;
+  sub: string;
+  href: string;
+}) {
   return (
-    <div className="flex gap-3.5 rounded-[10px] p-3.5 hover:bg-surface2 cursor-default">
+    <Link href={href} className="flex gap-3.5 rounded-[10px] p-3.5 hover:bg-surface2">
       <span className="text-gold text-xl leading-none">{icon}</span>
-      <div>
-        <div className="text-[15px]">{title}</div>
-        <div className="text-xs text-muted mt-0.5">{sub}</div>
-      </div>
-    </div>
+      <span>
+        <span className="block text-[15px]">{title}</span>
+        <span className="block text-xs text-muted mt-0.5">{sub}</span>
+      </span>
+    </Link>
   );
 }
 
@@ -68,12 +78,12 @@ export async function PublicNav() {
                 {t("nav_about")} <span className="text-[9px] text-gold">▾</span>
               </summary>
               <div className="absolute left-1/2 -translate-x-1/2 top-full z-50 w-[640px] bg-surface border border-line rounded-xl shadow-2xl shadow-black/40 p-3 grid grid-cols-2 gap-1">
-                <DropItem icon="◷" title={t("nd_a")} sub={t("nd_as")} />
-                <DropItem icon="◆" title={t("nd_b")} sub={t("nd_bs")} />
-                <DropItem icon="✦" title={t("nd_c")} sub={t("nd_cs")} />
-                <DropItem icon="◉" title={t("nd_d")} sub={t("nd_ds")} />
-                <DropItem icon="❈" title={t("nd_e")} sub={t("nd_es")} />
-                <DropItem icon="⚖" title={t("nd_f")} sub={t("nd_fs")} />
+                <DropItem href="/nosotros#conocenos" icon="◷" title={t("nd_a")} sub={t("nd_as")} />
+                <DropItem href="/nosotros#pilares" icon="◆" title={t("nd_b")} sub={t("nd_bs")} />
+                <DropItem href="/nosotros#filosofia" icon="✦" title={t("nd_c")} sub={t("nd_cs")} />
+                <DropItem href="/nosotros#cobertura" icon="◉" title={t("nd_d")} sub={t("nd_ds")} />
+                <DropItem href="/nosotros#responsabilidad" icon="❈" title={t("nd_e")} sub={t("nd_es")} />
+                <DropItem href="/nosotros#etica" icon="⚖" title={t("nd_f")} sub={t("nd_fs")} />
               </div>
             </details>
 
@@ -82,10 +92,10 @@ export async function PublicNav() {
                 {t("nav_services")} <span className="text-[9px] text-gold">▾</span>
               </summary>
               <div className="absolute left-1/2 -translate-x-1/2 top-full z-50 w-[640px] bg-surface border border-line rounded-xl shadow-2xl shadow-black/40 p-3 grid grid-cols-2 gap-1">
-                <DropItem icon="◫" title={t("sd_a")} sub={t("sd_as")} />
-                <DropItem icon="✧" title={t("sd_b")} sub={t("sd_bs")} />
-                <DropItem icon="★" title={t("sd_c")} sub={t("sd_cs")} />
-                <DropItem icon="⌘" title={t("sd_d")} sub={t("sd_ds")} />
+                <DropItem href="/servicios#integrales" icon="◫" title={t("sd_a")} sub={t("sd_as")} />
+                <DropItem href="/servicios#certificaciones" icon="✧" title={t("sd_b")} sub={t("sd_bs")} />
+                <DropItem href="/servicios#calificaciones" icon="★" title={t("sd_c")} sub={t("sd_cs")} />
+                <DropItem href="/servicios#tecnologia" icon="⌘" title={t("sd_d")} sub={t("sd_ds")} />
               </div>
             </details>
 
