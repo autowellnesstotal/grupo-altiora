@@ -1,0 +1,8 @@
+node_modules
+.next
+legacy
+uploads
+.env
+.env.local
+.git
+README.md

@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0a1a24;
+  --color-surface: #0f2733;
+  --color-surface2: #08151d;
+  --color-gold: #c8a24a;
+  --color-gold2: #d4af37;
+  --color-ivory: #f4f2ec;
+  --color-muted: #9fb0ba;
+  --color-line: rgba(200, 162, 74, 0.18);
+  --color-line2: rgba(159, 176, 186, 0.14);
+  --font-serif: var(--font-cormorant), serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-navy);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+select option {
+  background: var(--color-surface);
+  color: var(--color-ivory);
+}
+
+/* Placeholder de "foto propiedad" (patrón rayado, cero imágenes = PageSpeed) */
+.photo-ph {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0 2px,
+    transparent 2px 12px
+  );
+}

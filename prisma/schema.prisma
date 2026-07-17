@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========== better-auth (User/Session/Account/Verification + admin plugin) ==========
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          String    @default("inversionista") // admin | agente | inversionista
+  banned        Boolean   @default(false)
+  banReason     String?
+  banExpires    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions   Session[]
+  accounts   Account[]
+  properties Property[]      @relation("CreatedProperties")
+  threads    MessageThread[]
+  messages   Message[]
+  statements Statement[]
+
+  @@map("user")
+}
+
+model Session {
+  id             String   @id
+  expiresAt      DateTime
+  token          String   @unique
+  ipAddress      String?
+  userAgent      String?
+  impersonatedBy String?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verification")
+}
+
+// ========== Dominio Altiora ==========
+
+enum PropertyCategory {
+  ADJUDICADO
+  CESION
+}
+
+enum PropertyStatus {
+  BORRADOR
+  PUBLICADA
+}
+
+model Property {
+  id          String           @id @default(cuid())
+  clave       String           @unique // ALT-0426
+  slug        String           @unique
+  tipo        String // Casa sola, Departamento, Terreno, Local comercial, Casa en condominio
+  categoria   PropertyCategory
+  ubicacion   String
+  estado      String // CDMX, Querétaro, ...
+  precio      Decimal?         @db.Decimal(14, 2)
+  avaluo      Decimal?         @db.Decimal(14, 2)
+  precioOculto Boolean         @default(false) // "Consulte precio"
+  descripcion String?
+  status      PropertyStatus   @default(BORRADOR)
+  hue         Int              @default(200) // tono del placeholder cuando no hay foto
+  createdById String?
+  createdBy   User?            @relation("CreatedProperties", fields: [createdById], references: [id], onDelete: SetNull)
+  images      PropertyImage[]
+  documents   Document[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([status, categoria, estado])
+  @@map("property")
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  // rutas relativas dentro de UPLOADS_DIR (variantes WebP generadas al subir)
+  cardPath   String // 640w
+  largePath  String // 1280w
+  width      Int
+  height     Int
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@index([propertyId])
+  @@map("property_image")
+}
+
+model Document {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  title      String
+  filePath   String // relativo a UPLOADS_DIR
+  sizeBytes  Int
+  createdAt  DateTime @default(now())
+
+  @@index([propertyId])
+  @@map("document")
+}
+
+model MessageThread {
+  id        String    @id @default(cuid())
+  userId    String    @unique // un hilo por usuario (inversionista/agente) con el asesor
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+
+  @@map("message_thread")
+}
+
+model Message {
+  id        String        @id @default(cuid())
+  threadId  String
+  thread    MessageThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  body      String
+  createdAt DateTime      @default(now())
+
+  @@index([threadId, createdAt])
+  @@map("message")
+}
+
+model Statement {
+  id        String          @id @default(cuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  titulo    String // p.ej. "Crédito ALT-2206 · Cesión de derechos"
+  saldo     Decimal         @db.Decimal(14, 2)
+  lines     StatementLine[]
+  createdAt DateTime        @default(now())
+
+  @@index([userId])
+  @@map("statement")
+}
+
+model StatementLine {
+  id          String    @id @default(cuid())
+  statementId String
+  statement   Statement @relation(fields: [statementId], references: [id], onDelete: Cascade)
+  fecha       DateTime
+  concepto    String
+  cargo       Decimal?  @db.Decimal(14, 2)
+  abono       Decimal?  @db.Decimal(14, 2)
+
+  @@index([statementId, fecha])
+  @@map("statement_line")
+}
