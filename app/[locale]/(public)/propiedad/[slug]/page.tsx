@@ -61,11 +61,18 @@ export default async function PropiedadPage({
               [
                 [t("category"), catLabel],
                 [t("state"), p.estado],
+                ...(p.m2Terreno != null ? [[t("land"), `${p.m2Terreno} m²`]] : []),
+                ...(p.m2Construccion != null ? [[t("built"), `${p.m2Construccion} m²`]] : []),
+                ...(p.recamaras != null ? [[t("beds"), String(p.recamaras)]] : []),
+                ...(p.banos != null ? [[t("baths"), String(p.banos)]] : []),
+                ...(p.estacionamientos != null
+                  ? [[t("parking"), String(p.estacionamientos)]]
+                  : []),
                 [
                   t("appraisal"),
                   p.avaluo != null ? formatPriceMXN(p.avaluo) : "—",
                 ],
-              ] as const
+              ] as [string, string][]
             ).map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 border-b border-line2 pb-3">
                 <dt className="text-muted">{k}</dt>

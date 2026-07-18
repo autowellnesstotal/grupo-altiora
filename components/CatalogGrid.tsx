@@ -22,6 +22,9 @@ type Labels = {
   price_low: string;
   price_mid: string;
   price_high: string;
+  ab_rec: string;
+  ab_banos: string;
+  ab_bano_1: string;
 };
 
 const selectCls =
@@ -121,6 +124,9 @@ export function CatalogGrid({ items, labels }: { items: PropertyCardData[]; labe
                 ver: labels.ver,
                 consult: labels.consult,
                 catLabel: p.categoria === "ADJUDICADO" ? labels.adj : labels.ces,
+                abRec: labels.ab_rec,
+                abBanos: labels.ab_banos,
+                abBano1: labels.ab_bano_1,
               }}
             />
           ))}

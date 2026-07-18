@@ -66,8 +66,19 @@ export function PropertyCard({
     ver: string;
     consult: string;
     catLabel: string;
+    abRec: string;
+    abBanos: string;
+    abBano1: string;
   };
 }) {
+  // Línea de especificaciones estilo portal inmobiliario: "140 m² · 3 rec · 2.5 baños"
+  const m2 = p.m2Construccion ?? p.m2Terreno;
+  const specs = [
+    m2 != null ? `${m2} m²` : null,
+    p.recamaras != null ? `${p.recamaras} ${labels.abRec}` : null,
+    p.banos != null ? `${p.banos} ${p.banos === 1 ? labels.abBano1 : labels.abBanos}` : null,
+  ].filter(Boolean);
+
   return (
     <Link
       href={`/propiedad/${p.slug}`}
@@ -78,6 +89,9 @@ export function PropertyCard({
         <div className="text-[17px] text-ivory">{p.tipo}</div>
         <div className="text-xs tracking-[0.06em] uppercase text-gold mt-1">{labels.catLabel}</div>
         <div className="text-[13px] text-muted mt-2">{p.ubicacion}</div>
+        {specs.length > 0 && (
+          <div className="text-[12px] text-ivory/85 mt-2">{specs.join(" · ")}</div>
+        )}
         <div className="h-px bg-line2 my-3.5" />
         <div className="flex items-end justify-between gap-2">
           <div>

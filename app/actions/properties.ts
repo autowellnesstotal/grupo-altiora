@@ -23,7 +23,13 @@ const propertySchema = z.object({
   precio: z.coerce.number().positive().max(999_000_000).optional().or(z.literal("").transform(() => undefined)),
   avaluo: z.coerce.number().positive().max(999_000_000).optional().or(z.literal("").transform(() => undefined)),
   precioOculto: z.coerce.boolean().default(false),
-  descripcion: z.string().trim().max(2000).optional(),
+  descripcion: z.string().trim().max(2000).optional().or(z.literal("").transform(() => undefined)),
+  // Ficha técnica (opcional)
+  m2Terreno: z.coerce.number().int().positive().max(1_000_000).optional().or(z.literal("").transform(() => undefined)),
+  m2Construccion: z.coerce.number().int().positive().max(1_000_000).optional().or(z.literal("").transform(() => undefined)),
+  recamaras: z.coerce.number().int().min(0).max(50).optional().or(z.literal("").transform(() => undefined)),
+  banos: z.coerce.number().min(0).max(50).multipleOf(0.5).optional().or(z.literal("").transform(() => undefined)),
+  estacionamientos: z.coerce.number().int().min(0).max(200).optional().or(z.literal("").transform(() => undefined)),
 });
 
 export type ActionState = { ok: boolean; message?: string } | null;
@@ -83,6 +89,12 @@ export async function upsertProperty(
         ...data,
         precio: data.precio ?? null,
         avaluo: data.avaluo ?? null,
+        descripcion: data.descripcion ?? null,
+        m2Terreno: data.m2Terreno ?? null,
+        m2Construccion: data.m2Construccion ?? null,
+        recamaras: data.recamaras ?? null,
+        banos: data.banos ?? null,
+        estacionamientos: data.estacionamientos ?? null,
         images: saved.length
           ? { create: saved.map((s, i) => ({ ...s, order: 100 + i })) }
           : undefined,

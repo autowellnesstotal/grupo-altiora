@@ -35,13 +35,21 @@ async function upsertUser({ name, email, password, role }) {
 }
 
 const DEMO_PROPS = [
-  { clave: "ALT-0426", tipo: "Casa sola", categoria: "ADJUDICADO", ubicacion: "Roma Norte, CDMX", estado: "CDMX", precio: 5363000, avaluo: 6180000, hue: 208 },
-  { clave: "ALT-1903", tipo: "Departamento", categoria: "ADJUDICADO", ubicacion: "Santa Cruz Atoyac, CDMX", estado: "CDMX", precio: 4794000, avaluo: 5240000, hue: 26 },
-  { clave: "ALT-2206", tipo: "Casa sola", categoria: "CESION", ubicacion: "Valle de Aragón, Edo. Méx.", estado: "Estado de México", precio: null, avaluo: 3900000, hue: 158, precioOculto: true },
-  { clave: "ALT-0088", tipo: "Casa en condominio", categoria: "ADJUDICADO", ubicacion: "El Marqués, Querétaro", estado: "Querétaro", precio: 5856000, avaluo: 6400000, hue: 262 },
-  { clave: "ALT-1725", tipo: "Local comercial", categoria: "CESION", ubicacion: "Álvaro Obregón, CDMX", estado: "CDMX", precio: 3700000, avaluo: 4150000, hue: 14 },
-  { clave: "ALT-0512", tipo: "Terreno", categoria: "ADJUDICADO", ubicacion: "Zapopan, Jalisco", estado: "Jalisco", precio: 2293500, avaluo: 2700000, hue: 186 },
+  { clave: "ALT-0426", tipo: "Casa sola", categoria: "ADJUDICADO", ubicacion: "Roma Norte, CDMX", estado: "CDMX", precio: 5363000, avaluo: 6180000, hue: 208, m2Terreno: 180, m2Construccion: 240, recamaras: 3, banos: 2.5, estacionamientos: 2 },
+  { clave: "ALT-1903", tipo: "Departamento", categoria: "ADJUDICADO", ubicacion: "Santa Cruz Atoyac, CDMX", estado: "CDMX", precio: 4794000, avaluo: 5240000, hue: 26, m2Construccion: 92, recamaras: 2, banos: 2, estacionamientos: 1 },
+  { clave: "ALT-2206", tipo: "Casa sola", categoria: "CESION", ubicacion: "Valle de Aragón, Edo. Méx.", estado: "Estado de México", precio: null, avaluo: 3900000, hue: 158, precioOculto: true, m2Terreno: 120, m2Construccion: 150, recamaras: 3, banos: 2, estacionamientos: 1 },
+  { clave: "ALT-0088", tipo: "Casa en condominio", categoria: "ADJUDICADO", ubicacion: "El Marqués, Querétaro", estado: "Querétaro", precio: 5856000, avaluo: 6400000, hue: 262, m2Terreno: 140, m2Construccion: 185, recamaras: 3, banos: 3.5, estacionamientos: 2 },
+  { clave: "ALT-1725", tipo: "Local comercial", categoria: "CESION", ubicacion: "Álvaro Obregón, CDMX", estado: "CDMX", precio: 3700000, avaluo: 4150000, hue: 14, m2Construccion: 110, banos: 1, estacionamientos: 2 },
+  { clave: "ALT-0512", tipo: "Terreno", categoria: "ADJUDICADO", ubicacion: "Zapopan, Jalisco", estado: "Jalisco", precio: 2293500, avaluo: 2700000, hue: 186, m2Terreno: 300 },
 ];
+
+const specsOf = (p) => ({
+  m2Terreno: p.m2Terreno ?? null,
+  m2Construccion: p.m2Construccion ?? null,
+  recamaras: p.recamaras ?? null,
+  banos: p.banos ?? null,
+  estacionamientos: p.estacionamientos ?? null,
+});
 
 const slugify = (input) =>
   input
@@ -70,7 +78,8 @@ async function main() {
   for (const p of DEMO_PROPS) {
     await prisma.property.upsert({
       where: { clave: p.clave },
-      update: {},
+      // Backfill: si la propiedad ya existe, solo completa la ficha técnica
+      update: specsOf(p),
       create: {
         clave: p.clave,
         slug: `${slugify(p.tipo)}-${slugify(p.ubicacion)}-${p.clave.toLowerCase()}`,
@@ -83,6 +92,7 @@ async function main() {
         precioOculto: Boolean(p.precioOculto),
         hue: p.hue,
         status: "PUBLICADA",
+        ...specsOf(p),
       },
     });
   }

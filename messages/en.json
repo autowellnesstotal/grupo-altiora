@@ -182,7 +182,11 @@
     "price_low": "< $3M",
     "price_mid": "$3M – $5M",
     "price_high": "> $5M",
-    "consult": "Price on request"
+    "consult": "Price on request",
+    "ab_rec": "bd",
+    "ab_banos": "ba",
+    "ab_estac": "pk",
+    "ab_bano_1": "ba"
   },
   "property": {
     "back": "Back to catalog",
@@ -193,7 +197,12 @@
     "price": "Price",
     "appraisal": "Appraisal",
     "interested": "I'm interested in this property",
-    "contact_note": "An Altiora advisor guides you through the whole process, with legal and tax shielding included."
+    "contact_note": "An Altiora advisor guides you through the whole process, with legal and tax shielding included.",
+    "land": "Lot size",
+    "built": "Built area",
+    "beds": "Bedrooms",
+    "baths": "Bathrooms",
+    "parking": "Parking"
   },
   "access": {
     "eyebrow": "Client portal",
@@ -321,6 +330,13 @@
     "seg_backup_t": "Backup codes",
     "seg_backup_s": "Store them somewhere safe (not on this device). Each one works only once if you lose access to your app.",
     "seg_done": "✓ Two-step verification enabled.",
-    "seg_err": "Could not complete. Check the password or code and try again."
+    "seg_err": "Could not complete. Check the password or code and try again.",
+    "l_m2t": "Lot size (m²)",
+    "l_m2c": "Built area (m²)",
+    "l_rec": "Bedrooms",
+    "l_banos": "Bathrooms",
+    "l_estac": "Parking spots",
+    "l_desc": "Description",
+    "l_ficha": "Property specs (optional)"
   }
 }

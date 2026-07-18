@@ -17,6 +17,13 @@ export type PropertyFormLabels = {
   l_precio_consultar: string;
   l_fotos: string;
   l_drop: string;
+  l_ficha: string;
+  l_m2t: string;
+  l_m2c: string;
+  l_rec: string;
+  l_banos: string;
+  l_estac: string;
+  l_desc: string;
   publish: string;
   cancel: string;
   adj: string;
@@ -38,6 +45,11 @@ export function PropertyForm({
     avaluo?: number | null;
     precioOculto?: boolean;
     descripcion?: string | null;
+    m2Terreno?: number | null;
+    m2Construccion?: number | null;
+    recamaras?: number | null;
+    banos?: number | null;
+    estacionamientos?: number | null;
   };
   labels: PropertyFormLabels;
 }) {
@@ -128,6 +140,45 @@ export function PropertyForm({
           className="accent-[#C8A24A] w-4 h-4"
         />
         {labels.l_precio_consultar}
+      </label>
+
+      {/* Ficha técnica estándar (todo opcional) */}
+      <fieldset className="sm:col-span-2 border border-line2 rounded-[10px] p-4 pt-3">
+        <legend className="text-xs text-gold px-1.5">{labels.l_ficha}</legend>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          {(
+            [
+              ["m2Terreno", labels.l_m2t, 1, defaults?.m2Terreno],
+              ["m2Construccion", labels.l_m2c, 1, defaults?.m2Construccion],
+              ["recamaras", labels.l_rec, 1, defaults?.recamaras],
+              ["banos", labels.l_banos, 0.5, defaults?.banos],
+              ["estacionamientos", labels.l_estac, 1, defaults?.estacionamientos],
+            ] as const
+          ).map(([name, label, step, def]) => (
+            <label key={name}>
+              <span className={labelCls}>{label}</span>
+              <input
+                name={name}
+                type="number"
+                min={0}
+                step={step}
+                defaultValue={def ?? ""}
+                className={inputCls}
+              />
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <label className="sm:col-span-2">
+        <span className={labelCls}>{labels.l_desc}</span>
+        <textarea
+          name="descripcion"
+          rows={4}
+          maxLength={2000}
+          defaultValue={defaults?.descripcion ?? ""}
+          className={inputCls}
+        />
       </label>
       <label className="sm:col-span-2">
         <span className={labelCls}>{labels.l_fotos}</span>

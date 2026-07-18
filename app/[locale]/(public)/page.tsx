@@ -28,6 +28,9 @@ export default async function HomePage({
     ver: tcat("ver"),
     consult: tcat("consult"),
     catLabel: categoria === "ADJUDICADO" ? tc("adj") : tc("ces"),
+    abRec: tcat("ab_rec"),
+    abBanos: tcat("ab_banos"),
+    abBano1: tcat("ab_bano_1"),
   });
 
   return (

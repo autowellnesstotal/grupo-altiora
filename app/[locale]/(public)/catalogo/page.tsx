@@ -61,6 +61,9 @@ export default async function CatalogoPage({
             price_low: t("price_low"),
             price_mid: t("price_mid"),
             price_high: t("price_high"),
+            ab_rec: t("ab_rec"),
+            ab_banos: t("ab_banos"),
+            ab_bano_1: t("ab_bano_1"),
           }}
         />
       </section>

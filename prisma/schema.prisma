@@ -121,6 +121,12 @@ model Property {
   avaluo      Decimal?         @db.Decimal(14, 2)
   precioOculto Boolean         @default(false) // "Consulte precio"
   descripcion String?
+  // Ficha técnica estándar de la industria (todos opcionales: un terreno no tiene recámaras)
+  m2Terreno        Int?
+  m2Construccion   Int?
+  recamaras        Int?
+  banos            Decimal?    @db.Decimal(3, 1) // permite 2.5
+  estacionamientos Int?
   status      PropertyStatus   @default(BORRADOR)
   hue         Int              @default(200) // tono del placeholder cuando no hay foto
   createdById String?

@@ -182,7 +182,11 @@
     "price_low": "< $3M",
     "price_mid": "$3M – $5M",
     "price_high": "> $5M",
-    "consult": "Consulte precio"
+    "consult": "Consulte precio",
+    "ab_rec": "rec",
+    "ab_banos": "baños",
+    "ab_estac": "est",
+    "ab_bano_1": "baño"
   },
   "property": {
     "back": "Volver al catálogo",
@@ -193,7 +197,12 @@
     "price": "Precio",
     "appraisal": "Avalúo",
     "interested": "Me interesa esta propiedad",
-    "contact_note": "Un asesor Altiora te acompaña en todo el proceso, con blindaje legal y fiscal incluido."
+    "contact_note": "Un asesor Altiora te acompaña en todo el proceso, con blindaje legal y fiscal incluido.",
+    "land": "Terreno",
+    "built": "Construcción",
+    "beds": "Recámaras",
+    "baths": "Baños",
+    "parking": "Estacionamientos"
   },
   "access": {
     "eyebrow": "Portal de acreditados",
@@ -321,6 +330,13 @@
     "seg_backup_t": "Códigos de respaldo",
     "seg_backup_s": "Guárdalos en un lugar seguro (no en este equipo). Cada uno funciona una sola vez si pierdes acceso a tu app.",
     "seg_done": "✓ Verificación en dos pasos activada.",
-    "seg_err": "No se pudo completar. Verifica la contraseña o el código e intenta de nuevo."
+    "seg_err": "No se pudo completar. Verifica la contraseña o el código e intenta de nuevo.",
+    "l_m2t": "Terreno (m²)",
+    "l_m2c": "Construcción (m²)",
+    "l_rec": "Recámaras",
+    "l_banos": "Baños",
+    "l_estac": "Estacionamientos",
+    "l_desc": "Descripción",
+    "l_ficha": "Ficha técnica (opcional)"
   }
 }
