@@ -39,7 +39,8 @@ export default async function PortalLayout({
   }
   items.push(
     { href: "/portal/boveda", icon: "⧉", label: t("bov") },
-    { href: "/portal/brujula", icon: "◉", label: t("bru") }
+    { href: "/portal/brujula", icon: "◉", label: t("bru") },
+    { href: "/portal/seguridad", icon: "⚿", label: t("seg") }
   );
   if (role === "admin") {
     items.push({ href: "/portal/admin/usuarios", icon: "✦", label: t("cta_admin") });

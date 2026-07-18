@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { admin } from "better-auth/plugins";
+import { admin, twoFactor } from "better-auth/plugins";
 import { prisma } from "./prisma";
 
 export const auth = betterAuth({
@@ -37,6 +37,8 @@ export const auth = betterAuth({
       defaultRole: "inversionista",
       adminRoles: ["admin"],
     }),
+    // 2FA TOTP opcional por usuario (obligatorio en la práctica para admin)
+    twoFactor({ issuer: "Altiora" }),
   ],
 });
 

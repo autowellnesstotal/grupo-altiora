@@ -59,6 +59,13 @@ export default async function AccesoPage({
               enter: t("enter"),
               error: t("error"),
               rateLimited: t("rate_limited"),
+              tfaTitle: t("tfa_title"),
+              tfaHint: t("tfa_hint"),
+              tfaCode: t("tfa_code"),
+              tfaVerify: t("tfa_verify"),
+              tfaUseBackup: t("tfa_use_backup"),
+              tfaUseTotp: t("tfa_use_totp"),
+              tfaError: t("tfa_error"),
             }}
           />
           <p className="text-xs text-muted text-center mt-5 border-t border-line2 pt-4">
