@@ -20,6 +20,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://grupoaltiora.cloud"),
   title: {
     default: "Altiora — Inversión inmobiliaria patrimonial",
     template: "%s · Altiora",
@@ -27,6 +28,18 @@ export const metadata: Metadata = {
   description:
     "Bienes adjudicados y cesiones de derechos con servicios legales y fiscales incluidos.",
   robots: { index: false, follow: false }, // datos de demostración
+  openGraph: {
+    type: "website",
+    siteName: "Grupo Altiora",
+    title: "Altiora — Inversión inmobiliaria patrimonial",
+    description:
+      "Bienes adjudicados y cesiones de derechos con servicios legales y fiscales incluidos.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Grupo Altiora" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og.png"],
+  },
 };
 
 export function generateStaticParams() {
