@@ -32,8 +32,15 @@ export default async function UsuariosPage({
     timeStyle: "short",
   });
 
-  const roleLabel = (r: string) =>
-    r === "admin" ? t("role_admin") : r === "agente" ? t("role_agente") : t("role_inversionista");
+  // Mapa explícito: un rol nuevo o desconocido se muestra tal cual, nunca
+  // etiquetado como otro (antes el `else` hacía pasar a `legal` por inversionista).
+  const ROLE_LABELS: Record<string, string> = {
+    admin: t("role_admin"),
+    agente: t("role_agente"),
+    inversionista: t("role_inversionista"),
+    legal: t("role_legal"),
+  };
+  const roleLabel = (r: string) => ROLE_LABELS[r] ?? r;
 
   return (
     <div>
