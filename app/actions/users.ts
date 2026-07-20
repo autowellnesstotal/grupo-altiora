@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/session";
 import { audit } from "@/lib/permissions";
 import type { ActionState } from "./properties";
@@ -53,6 +54,60 @@ export async function createPortalUser(
 
   const { session } = await requireRole("admin");
   await audit(session.user.id, "user.create", parsed.data.email, parsed.data.role);
+  revalidatePath("/portal/admin/usuarios");
+  return { ok: true };
+}
+
+/**
+ * Borra una cuenta SOLO si no arrastra información con ella.
+ * Bloquea si tiene estados de cuenta o mensajes (se perderían en cascada),
+ * si es la propia cuenta, o si es el último administrador.
+ * Lo que sí sobrevive al borrado (propiedades, expedientes, contratos, auditoría)
+ * no impide la operación: esos registros quedan sin autor, no se destruyen.
+ */
+export async function deletePortalUser(
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  const { session } = await requireRole("admin");
+  const userId = z.string().min(8).parse(formData.get("userId"));
+
+  if (userId === session.user.id) {
+    return { ok: false, message: "No puedes borrar tu propia cuenta." };
+  }
+
+  const target = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { id: true, email: true, role: true },
+  });
+  if (!target) return { ok: false, message: "La cuenta ya no existe." };
+
+  if (target.role === "admin") {
+    const admins = await prisma.user.count({ where: { role: "admin" } });
+    if (admins <= 1) {
+      return { ok: false, message: "No puedes borrar al único administrador." };
+    }
+  }
+
+  // Datos que se destruirían en cascada → mejor dar de baja
+  const [statements, messages, threads] = await Promise.all([
+    prisma.statement.count({ where: { userId } }),
+    prisma.message.count({ where: { authorId: userId } }),
+    prisma.messageThread.count({ where: { userId } }),
+  ]);
+  if (statements > 0 || messages > 0 || threads > 0) {
+    const partes: string[] = [];
+    if (statements > 0) partes.push(`${statements} estado(s) de cuenta`);
+    if (messages > 0) partes.push(`${messages} mensaje(s)`);
+    if (threads > 0 && messages === 0) partes.push("una conversación");
+    return {
+      ok: false,
+      message: `No se borró: esta cuenta tiene ${partes.join(" y ")} que se perderían. Usa "Dar de baja" para bloquear el acceso conservando la información.`,
+    };
+  }
+
+  await prisma.user.delete({ where: { id: userId } });
+  await audit(session.user.id, "user.delete", target.email, target.role);
   revalidatePath("/portal/admin/usuarios");
   return { ok: true };
 }

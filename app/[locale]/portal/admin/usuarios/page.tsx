@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/session";
 import { CreateUserForm } from "@/components/CreateUserForm";
+import { DeleteUserButton } from "@/components/DeleteUserButton";
 import { setUserBanned } from "@/app/actions/users";
 
 export const dynamic = "force-dynamic";
@@ -93,19 +94,26 @@ export default async function UsuariosPage({
                 </td>
                 <td className="px-4 py-3.5 text-right">
                   {u.id !== session.user.id && (
-                    <form action={setUserBanned} className="inline">
-                      <input type="hidden" name="userId" value={u.id} />
-                      <input type="hidden" name="banned" value={u.banned ? "false" : "true"} />
-                      <button
-                        className={`border text-[11px] px-3 py-1.5 rounded-full ${
-                          u.banned
-                            ? "border-line text-muted hover:border-gold hover:text-gold"
-                            : "border-line text-muted hover:border-red-400 hover:text-red-400"
-                        }`}
-                      >
-                        {u.banned ? "Reactivar" : "Dar de baja"}
-                      </button>
-                    </form>
+                    <div className="flex gap-2 justify-end items-center flex-wrap">
+                      <form action={setUserBanned} className="inline">
+                        <input type="hidden" name="userId" value={u.id} />
+                        <input type="hidden" name="banned" value={u.banned ? "false" : "true"} />
+                        <button
+                          className={`border text-[11px] px-3 py-1.5 rounded-full whitespace-nowrap ${
+                            u.banned
+                              ? "border-line text-muted hover:border-gold hover:text-gold"
+                              : "border-line text-muted hover:border-red-400 hover:text-red-400"
+                          }`}
+                        >
+                          {u.banned ? t("adm_reactivar") : t("adm_baja")}
+                        </button>
+                      </form>
+                      <DeleteUserButton
+                        userId={u.id}
+                        email={u.email}
+                        labels={{ delete: t("adm_delete"), confirm: t("adm_delete_confirm") }}
+                      />
+                    </div>
                   )}
                 </td>
               </tr>

@@ -437,6 +437,10 @@
     "co_l_escritura": "Escritura pública (opcional)",
     "co_l_domnotif": "Domicilio para notificaciones (opcional)",
     "co_l_email": "Correo para notificaciones (opcional)",
-    "co_l_fiador_dist": "El fiador es distinto al arrendatario"
+    "co_l_fiador_dist": "El fiador es distinto al arrendatario",
+    "adm_delete": "Borrar",
+    "adm_delete_confirm": "¿Borrar definitivamente la cuenta {email}?\n\nEsta acción no se puede deshacer. Si la cuenta tiene estados de cuenta o mensajes, el sistema la protegerá y no se borrará.",
+    "adm_baja": "Dar de baja",
+    "adm_reactivar": "Reactivar"
   }
 }

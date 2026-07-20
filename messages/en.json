@@ -437,6 +437,10 @@
     "co_l_escritura": "Public deed (optional)",
     "co_l_domnotif": "Address for notices (optional)",
     "co_l_email": "Email for notices (optional)",
-    "co_l_fiador_dist": "Guarantor differs from tenant"
+    "co_l_fiador_dist": "Guarantor differs from tenant",
+    "adm_delete": "Delete",
+    "adm_delete_confirm": "Permanently delete the account {email}?\n\nThis cannot be undone. If the account has statements or messages, the system will protect it and refuse to delete.",
+    "adm_baja": "Deactivate",
+    "adm_reactivar": "Reactivate"
   }
 }
