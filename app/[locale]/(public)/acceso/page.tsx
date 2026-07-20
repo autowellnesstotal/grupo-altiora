@@ -53,7 +53,6 @@ export default async function AccesoPage({
             <h2 className="font-serif font-semibold text-[28px]">{t("form_title")}</h2>
           </div>
           <LoginForm
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
             locale={locale}
             labels={{
               email: t("email"),

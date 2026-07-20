@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { Turnstile } from "./Turnstile";
@@ -10,7 +10,6 @@ const inputCls =
 
 export function LoginForm({
   labels,
-  siteKey,
   locale,
 }: {
   labels: {
@@ -28,7 +27,6 @@ export function LoginForm({
     tfaError: string;
     captchaPending: string;
   };
-  siteKey?: string;
   locale?: string;
 }) {
   const router = useRouter();
@@ -40,6 +38,19 @@ export function LoginForm({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [captcha, setCaptcha] = useState<string | null>(null);
+  // undefined = aún consultando; null = Turnstile no configurado; string = activo
+  const [siteKey, setSiteKey] = useState<string | null | undefined>(undefined);
+
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/turnstile")
+      .then((r) => r.json())
+      .then((d) => alive && setSiteKey(d.siteKey ?? null))
+      .catch(() => alive && setSiteKey(null));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -149,7 +160,7 @@ export function LoginForm({
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
-      {siteKey && <Turnstile siteKey={siteKey} onToken={setCaptcha} locale={locale} />}
+      {siteKey ? <Turnstile siteKey={siteKey} onToken={setCaptcha} locale={locale} /> : null}
       {error && (
         <p role="alert" className="text-sm text-red-400 mt-3">
           {error}
@@ -157,7 +168,7 @@ export function LoginForm({
       )}
       <button
         type="submit"
-        disabled={loading || (!!siteKey && !captcha)}
+        disabled={loading || siteKey === undefined || (!!siteKey && !captcha)}
         className="w-full mt-6 bg-gold hover:bg-gold2 disabled:opacity-60 text-navy font-semibold text-[15px] py-3.5 rounded-[9px]"
       >
         {loading ? "…" : siteKey && !captcha ? labels.captchaPending : labels.enter}
