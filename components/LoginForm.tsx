@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { Turnstile } from "./Turnstile";
 
 const inputCls =
   "w-full bg-surface2 border border-line2 focus:border-gold outline-none rounded-[9px] px-3.5 py-3 text-[15px] text-ivory";
 
 export function LoginForm({
   labels,
+  siteKey,
+  locale,
 }: {
   labels: {
     email: string;
@@ -23,7 +26,10 @@ export function LoginForm({
     tfaUseBackup: string;
     tfaUseTotp: string;
     tfaError: string;
+    captchaPending: string;
   };
+  siteKey?: string;
+  locale?: string;
 }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -33,12 +39,17 @@ export function LoginForm({
   const [useBackup, setUseBackup] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [captcha, setCaptcha] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { data, error: err } = await authClient.signIn.email({ email, password });
+    const { data, error: err } = await authClient.signIn.email(
+      { email, password },
+      // better-auth valida el token de Turnstile leyendo esta cabecera
+      captcha ? { headers: { "x-captcha-response": captcha } } : undefined
+    );
     setLoading(false);
     if (err) {
       setError(err.status === 429 ? labels.rateLimited : labels.error);
@@ -138,6 +149,7 @@ export function LoginForm({
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
+      {siteKey && <Turnstile siteKey={siteKey} onToken={setCaptcha} locale={locale} />}
       {error && (
         <p role="alert" className="text-sm text-red-400 mt-3">
           {error}
@@ -145,10 +157,10 @@ export function LoginForm({
       )}
       <button
         type="submit"
-        disabled={loading}
+        disabled={loading || (!!siteKey && !captcha)}
         className="w-full mt-6 bg-gold hover:bg-gold2 disabled:opacity-60 text-navy font-semibold text-[15px] py-3.5 rounded-[9px]"
       >
-        {loading ? "…" : labels.enter}
+        {loading ? "…" : siteKey && !captcha ? labels.captchaPending : labels.enter}
       </button>
     </form>
   );

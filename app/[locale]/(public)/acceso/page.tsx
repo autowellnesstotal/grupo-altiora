@@ -53,6 +53,8 @@ export default async function AccesoPage({
             <h2 className="font-serif font-semibold text-[28px]">{t("form_title")}</h2>
           </div>
           <LoginForm
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+            locale={locale}
             labels={{
               email: t("email"),
               password: t("password"),
@@ -66,6 +68,7 @@ export default async function AccesoPage({
               tfaUseBackup: t("tfa_use_backup"),
               tfaUseTotp: t("tfa_use_totp"),
               tfaError: t("tfa_error"),
+              captchaPending: t("captcha_pending"),
             }}
           />
           <p className="text-xs text-muted text-center mt-5 border-t border-line2 pt-4">

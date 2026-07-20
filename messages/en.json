@@ -228,7 +228,8 @@
     "tfa_verify": "Verify",
     "tfa_use_backup": "Use a backup code",
     "tfa_use_totp": "Use the app code",
-    "tfa_error": "Incorrect code. Try again."
+    "tfa_error": "Incorrect code. Try again.",
+    "captcha_pending": "Verifying you're human…"
   },
   "portal": {
     "brand": "Órbita",

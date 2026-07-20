@@ -228,7 +228,8 @@
     "tfa_verify": "Verificar",
     "tfa_use_backup": "Usar un código de respaldo",
     "tfa_use_totp": "Usar el código de la app",
-    "tfa_error": "Código incorrecto. Intenta de nuevo."
+    "tfa_error": "Código incorrecto. Intenta de nuevo.",
+    "captcha_pending": "Verificando que eres humano…"
   },
   "portal": {
     "brand": "Órbita",

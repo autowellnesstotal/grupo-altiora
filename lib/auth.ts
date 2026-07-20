@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { admin, twoFactor } from "better-auth/plugins";
+import { admin, twoFactor, captcha } from "better-auth/plugins";
 import { prisma } from "./prisma";
 
 export const auth = betterAuth({
@@ -39,6 +39,17 @@ export const auth = betterAuth({
     }),
     // 2FA TOTP opcional por usuario (obligatorio en la práctica para admin)
     twoFactor({ issuer: "Altiora" }),
+    // Turnstile en el login: complementa el rate limit (que un atacante con
+    // muchas IPs esquiva). Solo se activa si la clave está configurada.
+    ...(process.env.TURNSTILE_SECRET_KEY
+      ? [
+          captcha({
+            provider: "cloudflare-turnstile",
+            secretKey: process.env.TURNSTILE_SECRET_KEY,
+            endpoints: ["/sign-in/email"],
+          }),
+        ]
+      : []),
   ],
 });
 
