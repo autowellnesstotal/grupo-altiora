@@ -12,7 +12,7 @@ const createUserSchema = z.object({
   name: z.string().trim().min(2).max(80),
   email: z.string().trim().email().max(160),
   password: z.string().min(12).max(128),
-  role: z.enum(["admin", "agente", "inversionista"]),
+  role: z.enum(["admin", "agente", "inversionista", "legal"]),
 });
 
 export async function createPortalUser(

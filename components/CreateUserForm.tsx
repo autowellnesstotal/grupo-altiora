@@ -17,7 +17,7 @@ export function CreateUserForm({
     role: string;
     create: string;
     created: string;
-    roles: { admin: string; agente: string; inversionista: string };
+    roles: { admin: string; agente: string; inversionista: string; legal: string };
   };
 }) {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
@@ -53,6 +53,7 @@ export function CreateUserForm({
           <select name="role" defaultValue="inversionista" className={inputCls}>
             <option value="inversionista">{labels.roles.inversionista}</option>
             <option value="agente">{labels.roles.agente}</option>
+            <option value="legal">{labels.roles.legal}</option>
             <option value="admin">{labels.roles.admin}</option>
           </select>
         </label>

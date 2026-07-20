@@ -37,6 +37,12 @@ export default async function PortalLayout({
   if (role === "inversionista") {
     items.push({ href: "/portal/estado-cuenta", icon: "◱", label: t("estado") });
   }
+  if (role === "legal" || role === "admin") {
+    items.push(
+      { href: "/portal/expedientes", icon: "⚖", label: t("exp") },
+      { href: "/portal/contratos", icon: "✎", label: t("con") }
+    );
+  }
   items.push(
     { href: "/portal/boveda", icon: "⧉", label: t("bov") },
     { href: "/portal/brujula", icon: "◉", label: t("bru") },

@@ -53,6 +53,7 @@ export default async function UsuariosPage({
               admin: t("role_admin"),
               agente: t("role_agente"),
               inversionista: t("role_inversionista"),
+              legal: t("role_legal"),
             },
           }}
         />

@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "./auth";
 
-export type Role = "admin" | "agente" | "inversionista";
+export type Role = "admin" | "agente" | "inversionista" | "legal";
 
 export async function getSession() {
   return auth.api.getSession({ headers: await headers() });

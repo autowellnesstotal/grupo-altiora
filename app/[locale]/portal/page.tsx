@@ -50,6 +50,39 @@ export default async function PortalHome({
     );
   }
 
+  if (role === "legal") {
+    const [activos, pendientes, pagados] = await Promise.all([
+      prisma.legalCase.count({ where: { etapa: "ACTIVO" } }),
+      prisma.legalCase.count({ where: { etapa: "PENDIENTE" } }),
+      prisma.legalCase.count({ where: { etapa: "PAGADO" } }),
+    ]);
+    return (
+      <div>
+        <h1 className="font-serif font-medium text-[34px]">{t("welcome_legal")}</h1>
+        <p className="text-[15px] text-muted mt-2 mb-7">{t("hello_legal")}</p>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl">
+          <Stat value={String(activos)} label={t("lg_activos")} />
+          <Stat value={String(pendientes)} label={t("lg_pendientes")} />
+          <Stat value={String(pagados)} label={t("lg_pagados")} />
+        </div>
+        <div className="mt-8 flex gap-3 flex-wrap">
+          <Link
+            href="/portal/expedientes"
+            className="border border-gold text-gold hover:bg-gold hover:text-navy text-sm px-6 py-2.5 rounded-full transition"
+          >
+            ⚖ {t("exp")}
+          </Link>
+          <Link
+            href="/portal/contratos"
+            className="bg-gold hover:bg-gold2 text-navy font-semibold text-sm px-6 py-2.5 rounded-full"
+          >
+            ✎ {t("con")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const [total, adj, ces, sum] = await Promise.all([
     prisma.property.count(),
     prisma.property.count({ where: { categoria: "ADJUDICADO" } }),

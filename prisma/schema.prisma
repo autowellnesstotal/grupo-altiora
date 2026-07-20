@@ -140,6 +140,98 @@ model Property {
   @@map("property")
 }
 
+// ── Módulo legal: seguimiento de expedientes en juzgados ──────────────────────
+enum CaseEtapa {
+  ACTIVO
+  PAGADO
+  PENDIENTE
+  ARCHIVADO
+}
+
+model LegalCase {
+  id               String     @id @default(cuid())
+  expediente       String // p. ej. "1143/24", "exh 305/25"
+  juzgado          String // p. ej. "4o Fam", "5o. Civil (Metepec)"
+  ciudad           String // bloque del Excel: METEPEC, TOLUCA…
+  etapa            CaseEtapa  @default(ACTIVO)
+  estatus          String? // texto libre operativo ("revisar citación…")
+  demandado        String
+  domicilio        String?
+  montoAdeudado    Decimal?   @db.Decimal(14, 2)
+  interesPct       Decimal?   @db.Decimal(5, 2)
+  fechaSuscripcion DateTime?
+  createdById      String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  updates  CaseUpdate[]
+  oficios  Oficio[]
+  exhortos Exhorto[]
+
+  @@index([etapa, juzgado])
+  @@index([demandado])
+  @@map("legal_case")
+}
+
+// Bitácora de actuaciones del expediente
+model CaseUpdate {
+  id        String    @id @default(cuid())
+  caseId    String
+  case      LegalCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  texto     String
+  autorId   String?
+  createdAt DateTime  @default(now())
+
+  @@index([caseId])
+  @@map("case_update")
+}
+
+// Oficios de búsqueda ante dependencias
+model Oficio {
+  id                 String    @id @default(cuid())
+  caseId             String
+  case               LegalCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  numero             String
+  dependencia        String
+  estatus            String?
+  observaciones      String?
+  domicilioIngresado String?
+  domicilioArrojado  String?
+  revisiones         String?
+  createdAt          DateTime  @default(now())
+
+  @@index([caseId])
+  @@map("oficio")
+}
+
+// Exhortos entre juzgados
+model Exhorto {
+  id             String    @id @default(cuid())
+  caseId         String
+  case           LegalCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  numero         String?
+  juzgadoDestino String?
+  estatus        String?
+  seguimiento    String?
+  createdAt      DateTime  @default(now())
+
+  @@index([caseId])
+  @@map("exhorto")
+}
+
+// Contratos generados desde plantilla (archivo en volumen + alta en Bóveda)
+model GeneratedContract {
+  id          String   @id @default(cuid())
+  tipo        String   @default("ARRENDAMIENTO")
+  datos       Json
+  docxPath    String
+  pdfPath     String?
+  createdById String?
+  createdAt   DateTime @default(now())
+
+  @@map("generated_contract")
+}
+
 model PropertyImage {
   id         String   @id @default(cuid())
   propertyId String

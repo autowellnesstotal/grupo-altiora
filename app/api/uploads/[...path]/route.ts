@@ -26,16 +26,25 @@ export async function GET(
     const abs = resolveUploadPath(relative);
     const data = await readFile(abs);
     const isPdf = relative.endsWith(".pdf");
-    return new NextResponse(new Uint8Array(data), {
-      headers: {
-        "Content-Type": isPdf ? "application/pdf" : "image/webp",
-        "Content-Disposition": isPdf ? "inline" : "inline",
-        "X-Content-Type-Options": "nosniff",
-        "Cache-Control": isPdf
-          ? "private, no-store"
-          : "public, max-age=31536000, immutable",
-      },
-    });
+    const isDocx = relative.endsWith(".docx");
+    const isPrivate = relative.startsWith("docs/");
+    const contentType = isPdf
+      ? "application/pdf"
+      : isDocx
+        ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        : "image/webp";
+    const headers: Record<string, string> = {
+      "Content-Type": contentType,
+      "X-Content-Type-Options": "nosniff",
+      "Cache-Control": isPrivate
+        ? "private, no-store"
+        : "public, max-age=31536000, immutable",
+    };
+    // Los .docx se descargan; imágenes y PDF se muestran en línea
+    headers["Content-Disposition"] = isDocx
+      ? `attachment; filename="${relative.split("/").pop()}"`
+      : "inline";
+    return new NextResponse(new Uint8Array(data), { headers });
   } catch {
     return new NextResponse("No encontrado", { status: 404 });
   }
