@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { LogoMark } from "./Logo";
+import { LogoBrand } from "./Logo";
 import { LangSwitch } from "./LangSwitch";
 import { NavDropdown } from "./NavDropdown";
 import { ThemeToggle } from "./ThemeToggle";
@@ -60,15 +60,10 @@ export async function PublicNav() {
       {/* Nav principal */}
       <div className="sticky top-0 z-50 bg-navy/90 backdrop-blur-md border-b border-line">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-6">
-          <Link href="/" className="flex items-center gap-3">
-            <LogoMark size={30} />
-            <span className="leading-none">
-              <span className="block font-serif text-[23px] font-semibold tracking-[0.16em] text-ivory">
-                ALTIORA
-              </span>
-              <span className="block text-[9px] tracking-[0.34em] text-gold mt-0.5">
-                {t("brand_sub")}
-              </span>
+          <Link href="/" className="flex flex-col gap-1" aria-label="Altiora">
+            <LogoBrand height={30} className="text-ivory" />
+            <span className="block text-[9px] tracking-[0.34em] text-gold text-center">
+              {t("brand_sub")}
             </span>
           </Link>
 
