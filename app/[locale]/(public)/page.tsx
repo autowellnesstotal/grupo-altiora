@@ -4,6 +4,7 @@ import { getPublishedProperties } from "@/lib/catalog";
 import { toCardData } from "@/lib/types";
 import { PropertyCard } from "@/components/PropertyCard";
 import { LogoMark } from "@/components/Logo";
+import { cifrasPortada, columnasBarra } from "@/lib/site-stats";
 
 // Dinámica a propósito: muestra 4 propiedades del catálogo. Si fuera estática
 // quedaría congelada con los datos del build (BD inaccesible) → sin propiedades
@@ -22,7 +23,10 @@ export default async function HomePage({
     getTranslations("common"),
     getTranslations("catalog"),
   ]);
-  const properties = (await getPublishedProperties()).slice(0, 4).map(toCardData);
+  // Una sola consulta: de aquí salen las tarjetas del preview Y las cifras.
+  const publicadas = await getPublishedProperties();
+  const cifras = cifrasPortada(publicadas);
+  const properties = publicadas.slice(0, 4).map(toCardData);
 
   const cardLabels = (categoria: "ADJUDICADO" | "CESION") => ({
     tagLegal: tc("tag_legal"),
@@ -80,26 +84,35 @@ export default async function HomePage({
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-gold text-navy px-5 py-3.5 rounded-xl shadow-2xl shadow-black/40">
-              <div className="font-serif text-[30px] font-semibold leading-none">+180</div>
-              <div className="text-[11px] tracking-[0.08em] mt-1">{t("img_stat")}</div>
-            </div>
+            {/* Conteo real de propiedades publicadas (o el override manual de
+                ALTIORA_STAT_PROPIEDADES). Si es 0 no se pinta: un "0 propiedades
+                activas" por un parpadeo de la BD parece un sitio roto. */}
+            {cifras.propiedadesActivas > 0 && (
+              <div className="absolute -bottom-4 -left-4 bg-gold text-navy px-5 py-3.5 rounded-xl shadow-2xl shadow-black/40">
+                <div className="font-serif text-[30px] font-semibold leading-none">
+                  {cifras.propiedadesManual && "+"}
+                  {cifras.propiedadesActivas}
+                </div>
+                <div className="text-[11px] tracking-[0.08em] mt-1">{t("img_stat")}</div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Barra de confianza */}
+      {/* Barra de confianza. Solo se pintan los mosaicos que tienen dato real:
+          años e inmuebles colocados no salen de la BD y siguen ocultos hasta que
+          se definan en Easypanel (ver lib/site-stats.ts). */}
       <section className="border-y border-line2 mt-8">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-8 py-8 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-          {[
-            ["25", t("tb_1")],
-            ["+1,200", t("tb_2")],
-            ["18", t("tb_3")],
-            ["100%", t("tb_4")],
-          ].map(([n, label]) => (
-            <div key={label}>
-              <div className="font-serif text-[40px] text-gold leading-none">{n}</div>
-              <div className="text-[14px] text-muted mt-2">{label}</div>
+        <div
+          className={`max-w-[1240px] mx-auto px-4 sm:px-8 py-8 grid grid-cols-2 ${columnasBarra(
+            cifras.barra.length
+          )} gap-6 text-center`}
+        >
+          {cifras.barra.map(({ valor, etiquetaKey }) => (
+            <div key={etiquetaKey}>
+              <div className="font-serif text-[40px] text-gold leading-none">{valor}</div>
+              <div className="text-[14px] text-muted mt-2">{t(etiquetaKey)}</div>
             </div>
           ))}
         </div>
@@ -116,17 +129,24 @@ export default async function HomePage({
         <div className="grid md:grid-cols-2 gap-6 mt-11">
           {(
             [
-              ["01", t("c1_t"), t("c1_d"), t("c1_bl"), t("c1_b"), "card-grad-a"],
-              ["02", t("c2_t"), t("c2_d"), t("c2_bl"), t("c2_b"), "card-grad-b"],
+              [t("c1_t"), t("c1_d"), t("c1_bl"), t("c1_b"), "card-grad-a"],
+              [t("c2_t"), t("c2_d"), t("c2_bl"), t("c2_b"), "card-grad-b"],
             ] as const
-          ).map(([num, title, desc, benefitLabel, benefit, grad]) => (
-            <div key={num} className="bg-surface border border-line2 rounded-2xl overflow-hidden">
-              <div className={`px-8 py-9 ${grad} border-b-2 border-gold`}>
-                <div className="text-[11px] tracking-[0.2em] uppercase text-gold">{num}</div>
-                <h3 className="font-serif font-semibold text-[30px] mt-2.5">{title}</h3>
+          ).map(([title, desc, benefitLabel, benefit, grad]) => (
+            // `flex flex-col` + `flex-1` en el cuerpo y en la descripción: el
+            // párrafo absorbe la diferencia de líneas entre las dos tarjetas y
+            // empuja la caja de beneficio al fondo, así quedan alineadas en
+            // cualquier ancho y en los dos idiomas. Con el texto solo no se
+            // puede: el desfase cambia de bando según el ancho.
+            <div
+              key={title}
+              className="bg-surface border border-line2 rounded-2xl overflow-hidden flex flex-col"
+            >
+              <div className={`px-8 py-10 ${grad} border-b-2 border-gold text-center`}>
+                <h3 className="font-serif font-semibold text-[30px]">{title}</h3>
               </div>
-              <div className="px-8 pt-7 pb-8">
-                <p className="text-[16px] leading-[1.7] text-muted">{desc}</p>
+              <div className="px-8 pt-7 pb-8 flex flex-col flex-1">
+                <p className="text-[16px] leading-[1.7] text-muted flex-1">{desc}</p>
                 <div className="mt-5 border-l-[3px] border-gold bg-gold/[0.07] px-4.5 py-4 rounded-r-[10px]">
                   <div className="text-xs tracking-[0.1em] uppercase text-gold font-semibold">
                     {benefitLabel}
