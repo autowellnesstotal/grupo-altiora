@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { LogoMark } from "./Logo";
+import { LogoLockup } from "./Logo";
 
 export async function Footer() {
   const t = await getTranslations("common");
@@ -8,10 +8,7 @@ export async function Footer() {
     <footer className="bg-surface2 border-t border-line">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8 pt-12 pb-7">
         <div className="text-center">
-          <span className="inline-flex items-center gap-3">
-            <LogoMark size={26} />
-            <span className="font-serif text-[22px] tracking-[0.16em]">ALTIORA</span>
-          </span>
+          <LogoLockup size={26} />
           <p className="font-serif italic text-[22px] text-gold mt-4">{t("ft_tag")}</p>
         </div>
         <div className="border-t border-line2 mt-8 pt-5 flex items-center justify-between gap-4 flex-wrap">
