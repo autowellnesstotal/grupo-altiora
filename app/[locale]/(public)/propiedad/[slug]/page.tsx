@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { getPropertyBySlug, getPublishedProperties } from "@/lib/catalog";
 import { toCardData } from "@/lib/types";
 import { PropertyPhoto, formatPriceMXN } from "@/components/PropertyCard";
+import { PropertyGallery } from "@/components/PropertyGallery";
 import { routing } from "@/i18n/routing";
 
 export const revalidate = 3600;
@@ -40,13 +41,32 @@ export default async function PropiedadPage({
 
       <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-9 mt-6 items-start">
         <div className="rounded-2xl overflow-hidden border border-line2">
-          <PropertyPhoto
-            p={p}
-            labels={{ tagLegal: tc("tag_legal"), photoPh: tc("photo_ph") }}
-            aspect="aspect-[16/10]"
-            large
-            priority
-          />
+          {property.images.length > 0 ? (
+            <PropertyGallery
+              images={property.images.map((img) => ({
+                cardPath: img.cardPath,
+                width: img.width,
+                height: img.height,
+              }))}
+              alt={`${p.tipo} — ${p.ubicacion}`}
+              clave={p.clave}
+              tagLegal={tc("tag_legal")}
+              labels={{
+                prev: t("gal_prev"),
+                next: t("gal_next"),
+                close: t("gal_close"),
+                zoom: t("gal_zoom"),
+              }}
+            />
+          ) : (
+            <PropertyPhoto
+              p={p}
+              labels={{ tagLegal: tc("tag_legal"), photoPh: tc("photo_ph") }}
+              aspect="aspect-[16/10]"
+              large
+              priority
+            />
+          )}
         </div>
 
         <div>

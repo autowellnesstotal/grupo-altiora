@@ -202,7 +202,11 @@
     "built": "Construcción",
     "beds": "Recámaras",
     "baths": "Baños",
-    "parking": "Estacionamientos"
+    "parking": "Estacionamientos",
+    "gal_prev": "Foto anterior",
+    "gal_next": "Foto siguiente",
+    "gal_close": "Cerrar",
+    "gal_zoom": "Clic para ampliar"
   },
   "access": {
     "eyebrow": "Portal de acreditados",

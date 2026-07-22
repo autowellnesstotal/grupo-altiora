@@ -202,7 +202,11 @@
     "built": "Built area",
     "beds": "Bedrooms",
     "baths": "Bathrooms",
-    "parking": "Parking"
+    "parking": "Parking",
+    "gal_prev": "Previous photo",
+    "gal_next": "Next photo",
+    "gal_close": "Close",
+    "gal_zoom": "Click to zoom"
   },
   "access": {
     "eyebrow": "Client portal",

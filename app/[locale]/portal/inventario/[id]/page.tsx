@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/session";
 import { canEditProperty } from "@/lib/permissions";
 import { PropertyForm } from "@/components/PropertyForm";
+import { AdminPhotos } from "@/components/AdminPhotos";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +25,11 @@ export default async function EditarPropiedadPage({
   // Antisabotaje: solo el dueño (según política) o el admin abren la edición
   if (!canEditProperty(role, session.user.id, property)) redirect("/portal/inventario");
 
-  const [t, tc] = await Promise.all([getTranslations("portal"), getTranslations("common")]);
+  const [t, tc, tp] = await Promise.all([
+    getTranslations("portal"),
+    getTranslations("common"),
+    getTranslations("property"),
+  ]);
 
   return (
     <div>
@@ -34,20 +39,21 @@ export default async function EditarPropiedadPage({
       <p className="text-[15px] text-muted mt-2 mb-6">{t("add_sub")}</p>
 
       {property.images.length > 0 && (
-        <div className="flex gap-3 mb-6 flex-wrap">
-          {property.images.map((img) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={img.id}
-              src={`/api/uploads/${img.cardPath}`}
-              alt=""
-              width={128}
-              height={Math.round((128 * img.height) / img.width)}
-              loading="lazy"
-              className="w-32 rounded-lg border border-line2 object-cover"
-            />
-          ))}
-        </div>
+        <AdminPhotos
+          images={property.images.map((img) => ({
+            id: img.id,
+            cardPath: img.cardPath,
+            width: img.width,
+            height: img.height,
+          }))}
+          alt={`${property.tipo} — ${property.ubicacion}`}
+          labels={{
+            prev: tp("gal_prev"),
+            next: tp("gal_next"),
+            close: tp("gal_close"),
+            zoom: tp("gal_zoom"),
+          }}
+        />
       )}
 
       <PropertyForm
