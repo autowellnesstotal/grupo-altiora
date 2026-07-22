@@ -59,10 +59,19 @@ export default async function HomePage({
             </div>
           </div>
           <div className="relative">
-            <div className="relative aspect-[4/3] rounded-2xl border border-line overflow-hidden photo-ph bg-surface flex items-center justify-center">
-              <span className="font-mono text-xs tracking-[0.12em] text-muted uppercase">
-                {t("img_render")}
-              </span>
+            <div className="relative aspect-[4/3] rounded-2xl border border-line overflow-hidden bg-surface">
+              {/* Foto del hero: estática en public/, eager (es el LCP del sitio) */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/hero.webp"
+                alt={t("img_render")}
+                width={1200}
+                height={799}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             </div>
             <div className="absolute -bottom-4 -left-4 bg-gold text-navy px-5 py-3.5 rounded-xl shadow-2xl shadow-black/40">
               <div className="font-serif text-[30px] font-semibold leading-none">+180</div>
