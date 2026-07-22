@@ -21,6 +21,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://grupoaltiora.cloud"),
+  // hreflang: le dice a los buscadores que /ruta y /en/ruta son la misma
+  // página en dos idiomas (evita que las traten como contenido duplicado).
+  // Inerte mientras el sitio esté en noindex, listo para el lanzamiento.
+  alternates: {
+    languages: {
+      es: "/",
+      en: "/en",
+      "x-default": "/",
+    },
+  },
   title: {
     default: "Altiora — Inversión inmobiliaria patrimonial",
     template: "%s · Altiora",
