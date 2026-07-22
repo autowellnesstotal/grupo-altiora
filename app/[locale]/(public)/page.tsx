@@ -63,13 +63,17 @@ export default async function HomePage({
           </div>
           <div className="relative">
             <div className="relative aspect-[4/3] rounded-2xl border border-line overflow-hidden bg-surface">
-              {/* Foto del hero: estática en public/, eager (es el LCP del sitio) */}
+              {/* Foto del hero: es el LCP del sitio. Ya recortada a 4:3 (el
+                  contenedor) y en 3 anchos, para que móvil no descargue la
+                  versión de escritorio. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/hero-valle.webp"
-                alt={t("img_render")}
-                width={1200}
-                height={799}
+                src="/hero-valle-800.webp"
+                srcSet="/hero-valle-560.webp 560w, /hero-valle-800.webp 800w, /hero-valle-1064.webp 1064w"
+                sizes="(min-width: 1024px) 564px, 100vw"
+                alt={t("img_alt")}
+                width={1064}
+                height={798}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"

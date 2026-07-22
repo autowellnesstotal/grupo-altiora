@@ -34,7 +34,16 @@ const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: __dirname,
   poweredByHeader: false,
-  headers: async () => [{ source: "/(.*)", headers: securityHeaders }],
+  headers: async () => [
+    { source: "/(.*)", headers: securityHeaders },
+    {
+      // Assets estáticos con nombre versionado (hero-valle-800.webp, og.png…):
+      // si cambia la imagen, cambia el nombre. Por defecto Next los sirve sin
+      // caché y Cloudflare solo les daba 4 h.
+      source: "/:file(hero-valle-\\d+\\.webp|og\\.png|apple-icon\\.png)",
+      headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    },
+  ],
 };
 
 export default withNextIntl(nextConfig);
