@@ -6,7 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import { Turnstile } from "./Turnstile";
 
 const inputCls =
-  "w-full bg-surface2 border border-line2 focus:border-gold outline-none rounded-[9px] px-3.5 py-3 text-[15px] text-ivory";
+  "w-full bg-surface2 border border-line2 focus:border-gold outline-none rounded-[9px] px-3.5 py-3 text-[16px] text-ivory";
 
 export function LoginForm({
   labels,
@@ -94,7 +94,7 @@ export function LoginForm({
   if (step === "totp") {
     return (
       <form onSubmit={onVerify}>
-        <p className="text-sm font-semibold mt-6">{labels.tfaTitle}</p>
+        <p className="text-[15px] font-semibold mt-6">{labels.tfaTitle}</p>
         <p className="text-xs text-muted mt-1.5">{labels.tfaHint}</p>
         <label className="block mt-4">
           <span className="block text-xs text-muted mb-1.5">{labels.tfaCode}</span>
@@ -110,14 +110,14 @@ export function LoginForm({
           />
         </label>
         {error && (
-          <p role="alert" className="text-sm text-red-400 mt-3">
+          <p role="alert" className="text-[15px] text-red-400 mt-3">
             {error}
           </p>
         )}
         <button
           type="submit"
           disabled={loading}
-          className="w-full mt-5 bg-gold hover:bg-gold2 disabled:opacity-60 text-navy font-semibold text-[15px] py-3.5 rounded-[9px]"
+          className="w-full mt-5 bg-gold hover:bg-gold2 disabled:opacity-60 text-navy font-semibold text-[16px] py-3.5 rounded-[9px]"
         >
           {loading ? "…" : labels.tfaVerify}
         </button>
@@ -162,14 +162,14 @@ export function LoginForm({
       </label>
       {siteKey ? <Turnstile siteKey={siteKey} onToken={setCaptcha} locale={locale} /> : null}
       {error && (
-        <p role="alert" className="text-sm text-red-400 mt-3">
+        <p role="alert" className="text-[15px] text-red-400 mt-3">
           {error}
         </p>
       )}
       <button
         type="submit"
         disabled={loading || siteKey === undefined || (!!siteKey && !captcha)}
-        className="w-full mt-6 bg-gold hover:bg-gold2 disabled:opacity-60 text-navy font-semibold text-[15px] py-3.5 rounded-[9px]"
+        className="w-full mt-6 bg-gold hover:bg-gold2 disabled:opacity-60 text-navy font-semibold text-[16px] py-3.5 rounded-[9px]"
       >
         {loading ? "…" : siteKey && !captcha ? labels.captchaPending : labels.enter}
       </button>

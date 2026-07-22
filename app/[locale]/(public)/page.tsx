@@ -42,17 +42,17 @@ export default async function HomePage({
             <h1 className="font-serif font-medium text-[clamp(34px,6vw,58px)] leading-[1.06] text-ivory text-balance">
               {t("title")}
             </h1>
-            <p className="text-[17px] leading-[1.7] text-muted max-w-[520px] mt-5">{t("sub")}</p>
+            <p className="text-[18px] leading-[1.7] text-muted max-w-[520px] mt-5">{t("sub")}</p>
             <div className="flex gap-3.5 mt-7 flex-wrap">
               <Link
                 href="/catalogo"
-                className="bg-gold hover:bg-gold2 text-navy font-semibold text-[15px] px-7 py-3.5 rounded-full"
+                className="bg-gold hover:bg-gold2 text-navy font-semibold text-[16px] px-7 py-3.5 rounded-full"
               >
                 {t("cta1")}
               </Link>
               <Link
                 href="/acceso"
-                className="border border-line hover:border-gold hover:text-gold text-ivory text-[15px] px-7 py-3.5 rounded-full"
+                className="border border-line hover:border-gold hover:text-gold text-ivory text-[16px] px-7 py-3.5 rounded-full"
               >
                 {t("cta2")}
               </Link>
@@ -83,7 +83,7 @@ export default async function HomePage({
           ].map(([n, label]) => (
             <div key={label}>
               <div className="font-serif text-[40px] text-gold leading-none">{n}</div>
-              <div className="text-[13px] text-muted mt-2">{label}</div>
+              <div className="text-[14px] text-muted mt-2">{label}</div>
             </div>
           ))}
         </div>
@@ -95,7 +95,7 @@ export default async function HomePage({
           <h2 className="font-serif font-medium text-[clamp(30px,4.5vw,44px)] text-ivory">
             {t("inv_title")}
           </h2>
-          <p className="text-base leading-[1.7] text-muted mt-4">{t("inv_sub")}</p>
+          <p className="text-[17px] leading-[1.7] text-muted mt-4">{t("inv_sub")}</p>
         </div>
         <div className="grid md:grid-cols-2 gap-6 mt-11">
           {(
@@ -110,12 +110,12 @@ export default async function HomePage({
                 <h3 className="font-serif font-semibold text-[30px] mt-2.5">{title}</h3>
               </div>
               <div className="px-8 pt-7 pb-8">
-                <p className="text-[15px] leading-[1.7] text-muted">{desc}</p>
+                <p className="text-[16px] leading-[1.7] text-muted">{desc}</p>
                 <div className="mt-5 border-l-[3px] border-gold bg-gold/[0.07] px-4.5 py-4 rounded-r-[10px]">
                   <div className="text-xs tracking-[0.1em] uppercase text-gold font-semibold">
                     {benefitLabel}
                   </div>
-                  <p className="text-sm leading-[1.6] text-ivory mt-2">{benefit}</p>
+                  <p className="text-[15px] leading-[1.6] text-ivory mt-2">{benefit}</p>
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default async function HomePage({
         <div className="text-center mt-8">
           <Link
             href="/catalogo"
-            className="inline-block border border-gold text-gold hover:bg-gold hover:text-navy text-[15px] px-8 py-3 rounded-full transition"
+            className="inline-block border border-gold text-gold hover:bg-gold hover:text-navy text-[16px] px-8 py-3 rounded-full transition"
           >
             {t("inv_cta")}
           </Link>
@@ -139,9 +139,9 @@ export default async function HomePage({
               <h2 className="font-serif font-medium text-[clamp(28px,4vw,40px)] text-ivory">
                 {t("cat_title")}
               </h2>
-              <p className="text-[15px] text-muted mt-3">{t("cat_sub")}</p>
+              <p className="text-[16px] text-muted mt-3">{t("cat_sub")}</p>
             </div>
-            <Link href="/catalogo" className="text-sm text-gold hover:text-gold2 whitespace-nowrap">
+            <Link href="/catalogo" className="text-[15px] text-gold hover:text-gold2 whitespace-nowrap">
               {t("cat_cta")} →
             </Link>
           </div>
@@ -159,7 +159,7 @@ export default async function HomePage({
           <h2 className="font-serif font-medium text-[clamp(30px,4.5vw,44px)]">
             {t("vp_title")}
           </h2>
-          <p className="text-base leading-[1.7] text-muted mt-4">{t("vp_sub")}</p>
+          <p className="text-[17px] leading-[1.7] text-muted mt-4">{t("vp_sub")}</p>
         </div>
         <div className="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3.5 items-center mt-12">
           {(
@@ -188,7 +188,7 @@ export default async function HomePage({
                   {icon}
                 </div>
                 <h3 className="font-serif text-2xl mt-4">{title}</h3>
-                <p className="text-sm leading-[1.6] text-muted mt-2.5">{desc}</p>
+                <p className="text-[15px] leading-[1.6] text-muted mt-2.5">{desc}</p>
               </div>
             )
           )}
@@ -205,17 +205,17 @@ export default async function HomePage({
             <h2 className="font-serif font-medium text-[clamp(28px,4vw,40px)]">
               {t("pa_title")}
             </h2>
-            <p className="text-[15px] text-muted mt-3.5 mb-5">{t("pa_sub")}</p>
+            <p className="text-[16px] text-muted mt-3.5 mb-5">{t("pa_sub")}</p>
             <div className="grid gap-3">
               {[t("pa_b1"), t("pa_b2"), t("pa_b3"), t("pa_b4")].map((b) => (
-                <div key={b} className="flex items-center gap-3 text-[15px]">
+                <div key={b} className="flex items-center gap-3 text-[16px]">
                   <span className="text-gold">◆</span> {b}
                 </div>
               ))}
             </div>
             <Link
               href="/acceso"
-              className="inline-block mt-7 bg-gold hover:bg-gold2 text-navy font-semibold text-[15px] px-8 py-3.5 rounded-full"
+              className="inline-block mt-7 bg-gold hover:bg-gold2 text-navy font-semibold text-[16px] px-8 py-3.5 rounded-full"
             >
               {t("pa_cta")}
             </Link>
@@ -236,7 +236,7 @@ export default async function HomePage({
               ).map(([icon, name, desc]) => (
                 <div key={name} className="bg-surface2 border border-line2 rounded-xl p-4">
                   <div className="text-gold text-xl">{icon}</div>
-                  <div className="text-[13px] mt-2">{name}</div>
+                  <div className="text-[14px] mt-2">{name}</div>
                   <div className="text-[11px] text-muted">{desc}</div>
                 </div>
               ))}

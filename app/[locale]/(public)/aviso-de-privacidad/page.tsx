@@ -14,7 +14,7 @@ export default async function AvisoPage({
       <h1 className="font-serif font-medium text-[clamp(30px,4.5vw,42px)]">
         Aviso de privacidad
       </h1>
-      <div className="mt-6 space-y-4 text-[15px] leading-[1.75] text-muted">
+      <div className="mt-6 space-y-4 text-[16px] leading-[1.75] text-muted">
         <p>
           [Documento pendiente de redacción legal — LFPDPPP.] Grupo Altiora, con domicilio en
           Ciudad de México, es responsable del tratamiento de los datos personales que se recaban

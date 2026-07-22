@@ -35,7 +35,7 @@ export default async function PropiedadPage({
 
   return (
     <section className="max-w-[1080px] mx-auto px-4 sm:px-8 py-12">
-      <Link href="/catalogo" className="text-[13px] text-muted hover:text-gold">
+      <Link href="/catalogo" className="text-[14px] text-muted hover:text-gold">
         ← {t("back")}
       </Link>
 
@@ -76,7 +76,7 @@ export default async function PropiedadPage({
           </h1>
           <p className="text-muted mt-1.5">{p.ubicacion}</p>
 
-          <dl className="mt-7 grid gap-3.5 text-[15px]">
+          <dl className="mt-7 grid gap-3.5 text-[16px]">
             {(
               [
                 [t("category"), catLabel],
@@ -108,16 +108,16 @@ export default async function PropiedadPage({
           </dl>
 
           {property.descripcion && (
-            <p className="text-[15px] leading-[1.7] text-muted mt-6">{property.descripcion}</p>
+            <p className="text-[16px] leading-[1.7] text-muted mt-6">{property.descripcion}</p>
           )}
 
           <div className="mt-8 border-l-[3px] border-gold bg-gold/[0.07] px-5 py-4 rounded-r-[10px]">
-            <p className="text-sm leading-[1.6] text-ivory">{t("contact_note")}</p>
+            <p className="text-[15px] leading-[1.6] text-ivory">{t("contact_note")}</p>
           </div>
 
           <a
             href={`mailto:contacto@altiora.mx?subject=${encodeURIComponent(`${t("interested")} · ${p.clave}`)}`}
-            className="inline-block mt-6 bg-gold hover:bg-gold2 text-navy font-semibold text-[15px] px-8 py-3.5 rounded-full"
+            className="inline-block mt-6 bg-gold hover:bg-gold2 text-navy font-semibold text-[16px] px-8 py-3.5 rounded-full"
           >
             {t("interested")}
           </a>

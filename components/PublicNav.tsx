@@ -20,7 +20,7 @@ function DropItem({
     <Link href={href} className="flex gap-3.5 rounded-[10px] p-3.5 hover:bg-surface2">
       <span className="text-gold text-xl leading-none">{icon}</span>
       <span>
-        <span className="block text-[15px]">{title}</span>
+        <span className="block text-[16px]">{title}</span>
         <span className="block text-xs text-muted mt-0.5">{sub}</span>
       </span>
     </Link>
@@ -37,7 +37,7 @@ export async function PublicNav() {
       </div>
 
       {/* Barra utilitaria */}
-      <div className="bg-surface2 border-b border-line2 text-[13px]">
+      <div className="bg-surface2 border-b border-line2 text-[14px]">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-8 py-2 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-5 text-muted">
             <span className="flex items-center gap-1.5">
@@ -72,7 +72,7 @@ export async function PublicNav() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1.5 text-sm">
+          <nav className="hidden lg:flex items-center gap-1.5 text-[15px]">
             <Link href="/" className="px-3 py-2 rounded-md hover:text-gold">
               {t("nav_home")}
             </Link>
@@ -103,7 +103,7 @@ export async function PublicNav() {
 
           <Link
             href="/acceso"
-            className="bg-gold hover:bg-gold2 text-navy font-semibold text-sm px-5 py-2.5 rounded-full whitespace-nowrap"
+            className="bg-gold hover:bg-gold2 text-navy font-semibold text-[15px] px-5 py-2.5 rounded-full whitespace-nowrap"
           >
             {t("nav_signin")}
           </Link>

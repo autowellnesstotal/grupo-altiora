@@ -86,11 +86,11 @@ export function PropertyCard({
     >
       <PropertyPhoto p={p} labels={labels} />
       <div className="p-4 pb-5">
-        <div className="text-[17px] text-ivory">{p.tipo}</div>
+        <div className="text-[18px] text-ivory">{p.tipo}</div>
         <div className="text-xs tracking-[0.06em] uppercase text-gold mt-1">{labels.catLabel}</div>
-        <div className="text-[13px] text-muted mt-2">{p.ubicacion}</div>
+        <div className="text-[14px] text-muted mt-2">{p.ubicacion}</div>
         {specs.length > 0 && (
-          <div className="text-[12px] text-ivory/85 mt-2">{specs.join(" · ")}</div>
+          <div className="text-[13px] text-ivory/85 mt-2">{specs.join(" · ")}</div>
         )}
         <div className="h-px bg-line2 my-3.5" />
         <div className="flex items-end justify-between gap-2">

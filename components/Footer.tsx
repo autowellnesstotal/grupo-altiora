@@ -15,8 +15,8 @@ export async function Footer() {
           <p className="font-serif italic text-[22px] text-gold mt-4">{t("ft_tag")}</p>
         </div>
         <div className="border-t border-line2 mt-8 pt-5 flex items-center justify-between gap-4 flex-wrap">
-          <span className="text-xs text-muted">{t("ft_rights")}</span>
-          <Link href="/aviso-de-privacidad" className="text-xs text-gold hover:text-gold2">
+          <span className="text-[13px] text-muted">{t("ft_rights")}</span>
+          <Link href="/aviso-de-privacidad" className="text-[13px] text-gold hover:text-gold2">
             {t("ft_priv")}
           </Link>
         </div>

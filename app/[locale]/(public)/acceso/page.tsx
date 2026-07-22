@@ -22,25 +22,25 @@ export default async function AccesoPage({
         <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)]">
           {t("welcome")}
         </h1>
-        <p className="text-base leading-[1.7] text-muted mt-4 max-w-[480px]">{t("intro")}</p>
+        <p className="text-[17px] leading-[1.7] text-muted mt-4 max-w-[480px]">{t("intro")}</p>
         <div className="grid gap-3 mt-6 max-w-[440px]">
           {[t("b1"), t("b2"), t("b3"), t("b4")].map((b) => (
-            <div key={b} className="flex items-center gap-3 text-[15px]">
+            <div key={b} className="flex items-center gap-3 text-[16px]">
               <span className="text-gold">◆</span> {b}
             </div>
           ))}
         </div>
-        <p className="text-sm text-muted mt-6">{t("channels")}</p>
+        <p className="text-[15px] text-muted mt-6">{t("channels")}</p>
         <div className="mt-3.5 flex gap-9 flex-wrap">
           <div className="border-l-2 border-gold pl-3.5">
             <div className="text-xs text-muted">{t("att")}</div>
-            <div className="text-sm text-gold">clientes@altiora.mx</div>
-            <div className="text-[13px] text-muted">55 1084 3510</div>
+            <div className="text-[15px] text-gold">clientes@altiora.mx</div>
+            <div className="text-[14px] text-muted">55 1084 3510</div>
           </div>
           <div className="border-l-2 border-gold pl-3.5">
             <div className="text-xs text-muted">{t("den")}</div>
-            <div className="text-sm text-gold">etica@altiora.mx</div>
-            <div className="text-[13px] text-muted">55 1084 3512</div>
+            <div className="text-[15px] text-gold">etica@altiora.mx</div>
+            <div className="text-[14px] text-muted">55 1084 3512</div>
           </div>
         </div>
       </div>

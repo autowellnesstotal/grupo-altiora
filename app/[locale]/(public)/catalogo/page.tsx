@@ -28,7 +28,7 @@ export default async function CatalogoPage({
           <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)]">
             {t("title")}
           </h1>
-          <p className="text-base text-muted mt-3">{t("sub")}</p>
+          <p className="text-[17px] text-muted mt-3">{t("sub")}</p>
         </div>
       </section>
 
@@ -36,7 +36,7 @@ export default async function CatalogoPage({
         <div className="flex justify-end mb-4">
           <Link
             href="/"
-            className="border border-line text-muted hover:border-gold hover:text-gold text-[13px] px-4.5 py-2 rounded-full"
+            className="border border-line text-muted hover:border-gold hover:text-gold text-[14px] px-4.5 py-2 rounded-full"
           >
             ← {t("back")}
           </Link>

@@ -28,7 +28,7 @@ type Labels = {
 };
 
 const selectCls =
-  "w-full bg-surface2 text-ivory border border-line2 rounded-lg px-3 py-2.5 text-sm";
+  "w-full bg-surface2 text-ivory border border-line2 rounded-lg px-3 py-2.5 text-[15px]";
 
 export function CatalogGrid({ items, labels }: { items: PropertyCardData[]; labels: Labels }) {
   const [estado, setEstado] = useState("");
@@ -104,7 +104,7 @@ export function CatalogGrid({ items, labels }: { items: PropertyCardData[]; labe
         ))}
       </div>
 
-      <div className="text-sm text-muted mt-6 mb-5">
+      <div className="text-[15px] text-muted mt-6 mb-5">
         <span className="font-serif text-[22px] text-gold">{filtered.length}</span>{" "}
         {labels.results}
       </div>

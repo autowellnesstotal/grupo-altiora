@@ -37,7 +37,7 @@ export default async function NosotrosPage({
       <section className="bg-[radial-gradient(900px_400px_at_80%_-20%,rgba(200,162,74,0.10),transparent_60%),var(--color-surface2)] border-b border-line2">
         <div className="max-w-[1080px] mx-auto px-4 sm:px-8 pt-12 pb-9">
           <h1 className="font-serif font-medium text-[clamp(32px,5vw,46px)]">{t("title")}</h1>
-          <p className="text-base text-muted mt-3 max-w-[640px]">{t("sub")}</p>
+          <p className="text-[17px] text-muted mt-3 max-w-[640px]">{t("sub")}</p>
         </div>
       </section>
 
@@ -45,7 +45,7 @@ export default async function NosotrosPage({
         {/* Conócenos */}
         <section className="py-14 border-b border-line2">
           <SectionHead id="conocenos" title={t("s1_t")} />
-          <div className="grid md:grid-cols-2 gap-8 mt-6 text-[15px] leading-[1.75] text-muted">
+          <div className="grid md:grid-cols-2 gap-8 mt-6 text-[16px] leading-[1.75] text-muted">
             <p>{t("s1_p1")}</p>
             <p className="border-l-[3px] border-gold pl-5">{t("s1_p2")}</p>
           </div>
@@ -61,7 +61,7 @@ export default async function NosotrosPage({
                   {icon}
                 </div>
                 <h3 className="font-serif text-xl mt-4">{title}</h3>
-                <p className="text-sm leading-[1.65] text-muted mt-2">{desc}</p>
+                <p className="text-[15px] leading-[1.65] text-muted mt-2">{desc}</p>
               </div>
             ))}
           </div>
@@ -73,11 +73,11 @@ export default async function NosotrosPage({
           <div className="grid md:grid-cols-2 gap-4 mt-7">
             <div className="bg-surface border border-line2 rounded-2xl p-6">
               <h3 className="font-serif text-xl text-ivory">{t("mision_t")}</h3>
-              <p className="text-[15px] leading-[1.7] text-ivory mt-3">{t("mision")}</p>
+              <p className="text-[16px] leading-[1.7] text-ivory mt-3">{t("mision")}</p>
             </div>
             <div className="bg-surface border border-line2 rounded-2xl p-6">
               <h3 className="font-serif text-xl text-ivory">{t("vision_t")}</h3>
-              <p className="text-[15px] leading-[1.7] text-ivory mt-3">{t("vision")}</p>
+              <p className="text-[16px] leading-[1.7] text-ivory mt-3">{t("vision")}</p>
             </div>
           </div>
           <p className="font-serif italic text-[clamp(19px,2.5vw,24px)] text-gold leading-[1.5] max-w-[760px] mx-auto text-center mt-10">
@@ -85,7 +85,7 @@ export default async function NosotrosPage({
           </p>
           <div className="max-w-[680px] mx-auto text-center mt-10 border-t border-line2 pt-8">
             <p className="font-serif italic text-lg text-ivory">{t("proverbio")}</p>
-            <p className="text-[13px] text-muted mt-3 leading-[1.7]">{t("proverbio_src")}</p>
+            <p className="text-[14px] text-muted mt-3 leading-[1.7]">{t("proverbio_src")}</p>
           </div>
         </section>
 
@@ -94,14 +94,14 @@ export default async function NosotrosPage({
           <SectionHead id="cobertura" title={t("s4_t")} />
           <div className="flex flex-wrap items-center gap-8 mt-6">
             <div className="font-serif text-[64px] text-gold leading-none">18</div>
-            <p className="text-[15px] leading-[1.75] text-muted max-w-[560px]">{t("s4_p1")}</p>
+            <p className="text-[16px] leading-[1.75] text-muted max-w-[560px]">{t("s4_p1")}</p>
           </div>
         </section>
 
         {/* Responsabilidad */}
         <section className="py-14 border-b border-line2">
           <SectionHead id="responsabilidad" title={t("s5_t")} />
-          <p className="text-[15px] leading-[1.75] text-muted mt-6 max-w-[720px]">{t("s5_p1")}</p>
+          <p className="text-[16px] leading-[1.75] text-muted mt-6 max-w-[720px]">{t("s5_p1")}</p>
         </section>
 
         {/* Ética */}
@@ -111,7 +111,7 @@ export default async function NosotrosPage({
             {[t("e1"), t("e2"), t("e3"), t("e4"), t("e5"), t("e6")].map((e) => (
               <li
                 key={e}
-                className="flex gap-3 bg-surface border border-line2 rounded-xl px-5 py-4 text-sm leading-[1.6] text-muted"
+                className="flex gap-3 bg-surface border border-line2 rounded-xl px-5 py-4 text-[15px] leading-[1.6] text-muted"
               >
                 <span className="text-gold">⚖</span> {e}
               </li>
