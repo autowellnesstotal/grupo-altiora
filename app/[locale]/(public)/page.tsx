@@ -5,7 +5,10 @@ import { toCardData } from "@/lib/types";
 import { PropertyCard } from "@/components/PropertyCard";
 import { LogoMark } from "@/components/Logo";
 
-export const revalidate = 3600;
+// Dinámica a propósito: muestra 4 propiedades del catálogo. Si fuera estática
+// quedaría congelada con los datos del build (BD inaccesible) → sin propiedades
+// durante una hora tras cada deploy. La consulta va por `unstable_cache`.
+export const dynamic = "force-dynamic";
 
 export default async function HomePage({
   params,
@@ -63,7 +66,7 @@ export default async function HomePage({
               {/* Foto del hero: estática en public/, eager (es el LCP del sitio) */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/hero.webp"
+                src="/hero-valle.webp"
                 alt={t("img_render")}
                 width={1200}
                 height={799}

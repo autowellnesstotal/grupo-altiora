@@ -4,7 +4,11 @@ import { getPublishedProperties } from "@/lib/catalog";
 import { toCardData } from "@/lib/types";
 import { CatalogGrid } from "@/components/CatalogGrid";
 
-export const revalidate = 3600;
+// Dinámica a propósito: si fuera estática, quedaría congelada con los datos
+// del build de Docker (donde la BD no es accesible) → catálogo VACÍO durante
+// una hora después de cada deploy. El coste es mínimo porque la consulta va
+// por `unstable_cache` (no pega a la BD en cada visita).
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   const t = await getTranslations("catalog");

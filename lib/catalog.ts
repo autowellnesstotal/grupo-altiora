@@ -4,24 +4,31 @@ import { prisma } from "./prisma";
 
 export const CATALOG_TAG = "catalogo";
 
-/** Propiedades publicadas, cacheadas con tag (se invalida al publicar). */
-export const getPublishedProperties = unstable_cache(
-  async () => {
-    try {
-      return await prisma.property.findMany({
-        where: { status: "PUBLICADA" },
-        orderBy: { createdAt: "desc" },
-        include: { images: { orderBy: { order: "asc" }, take: 1 } },
-      });
-    } catch {
-      // BD no disponible (p. ej. durante el build de Docker): catálogo vacío,
-      // se regenera al primer request en runtime.
-      return [];
-    }
-  },
+const fetchPublishedProperties = unstable_cache(
+  async () =>
+    // OJO: sin try/catch aquí a propósito. Si la BD no responde (build de
+    // Docker), esto LANZA y unstable_cache no guarda nada. Si atrapáramos el
+    // error dentro, el `[]` del build quedaría cacheado y envenenaría el
+    // catálogo en producción hasta que expirara el revalidate (1 h).
+    prisma.property.findMany({
+      where: { status: "PUBLICADA" },
+      orderBy: { createdAt: "desc" },
+      include: { images: { orderBy: { order: "asc" }, take: 1 } },
+    }),
   ["published-properties"],
   { tags: [CATALOG_TAG], revalidate: 3600 }
 );
+
+/** Propiedades publicadas, cacheadas con tag (se invalida al publicar). */
+export async function getPublishedProperties() {
+  try {
+    return await fetchPublishedProperties();
+  } catch {
+    // BD no disponible: catálogo vacío SIN cachear, se resuelve en el
+    // siguiente request cuando la BD ya está accesible.
+    return [];
+  }
+}
 
 export async function getPropertyBySlug(slug: string) {
   try {
